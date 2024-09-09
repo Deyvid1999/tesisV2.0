@@ -32,6 +32,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     {{-- ICONOS --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">    
 
@@ -54,26 +56,21 @@
         <!-- Logo -->
         <div class="d-flex align-items-center justify-content-between">
             <a class="logo d-flex align-items-center">
-                <img src="{{ asset('img/Logo_ESPE.png') }}" alt="">
-                <span class="d-none d-lg-block">ESPE</span>
+                <img src="https://www.espe.edu.ec/wp-content/uploads/2023/03/espe.png" alt="espe_logo">
+                <span class="d-none d-lg-block text-danger">MENU</span>
             </a>
-            <i class="bi bi-list toggle-sidebar-btn"></i>
+            <i class="bi bi-list toggle-sidebar-btn  "></i>
         </div><!-- Fin Logo -->
         <!-- Navegacion -->
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
-                <li class="nav-item pe-3">
-                    <a class="logo d-flex align-items-center" style="width: 100%;">
-                        {{-- <img src="assets/img/logo.png" alt=""> --}}
-                        <span class="d-none d-lg-block">ESPE - Sistema de Autoevaluación Institucional</span>
-                    </a>
-                </li>
                 <li class="nav-item dropdown pe-3">
                     <!-- imagen perfil -->
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#"
                         data-bs-toggle="dropdown">
-                        <img src="{{ asset('storage/app/public') . '/' . Auth::user()->foto }}" alt="Profile"
-                            class="rounded-circle">
+                        <i class="bi bi-person"></i>
+                        <!-- <img src="{{ asset('storage/app/public') . '/' . Auth::user()->foto }}" alt="Profile"
+                            class="rounded-circle"> -->
                         <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->name }}</span>
                     </a><!-- Fin imagen perfil -->
                     <!-- perfil items -->

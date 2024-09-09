@@ -1633,8 +1633,9 @@ section {
 # Footer
 --------------------------------------------------------------*/
 #footer {
+  position: absolute;
+  bottom: 0px;
   font-size: 14px;
-  background: #fff;
 }
 
 #footer .footer-newsletter {

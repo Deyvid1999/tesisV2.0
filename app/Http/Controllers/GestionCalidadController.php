@@ -52,5 +52,4 @@ class GestionCalidadController extends Controller
             return redirect()->route('gestion.calidad.index', $evaluacion_id)->with('error', 'Error al crear el registro');
         }
     }
-
 }

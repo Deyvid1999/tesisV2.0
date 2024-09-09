@@ -102,177 +102,189 @@
 
 
     <div class="row">
-        <div class="col-sm-4">
-            <div class="card mb-3">
-                <a href="{{ route('condiciones.institucionales.resultado', $evaluacion->id) }}">
-                    <div class="card-header text-white" style="background-color: #008A94">CONDICIONES INSTITUCIONALES</div>
-                </a>
-                <div class="card-body pt-3" style="margin-top: 20px;">
-                    <div class="row text-center">
-                        <div class="col-sm-4">
-                            @if ($total_criterio_1 >= 80)
-                                <i class="bi bi-check-circle-fill text-actualizar" style="font-size: 40px"></i>
-                            @else
-                                <i class="bi bi-exclamation-circle-fill alerta" style="font-size: 40px"></i>
-                            @endif
+        @can('criterio_1')
+            <div class="col-sm-4">
+                <div class="card mb-3">
+                    <a href="{{ route('condiciones.institucionales.resultado', $evaluacion->id) }}">
+                        <div class="card-header text-white" style="background-color: #008A94">CONDICIONES INSTITUCIONALES</div>
+                    </a>
+                    <div class="card-body pt-3" style="margin-top: 20px;">
+                        <div class="row text-center">
+                            <div class="col-sm-4">
+                                @if ($total_criterio_1 >= 80)
+                                    <i class="bi bi-check-circle-fill text-actualizar" style="font-size: 40px"></i>
+                                @else
+                                    <i class="bi bi-exclamation-circle-fill alerta" style="font-size: 40px"></i>
+                                @endif
+                            </div>
+                            <div class="col-sm-8">
+                                <h2 style="font-size: 40px; color:{{ $total_criterio_1 >= 80 ? '#00c851' : '#ff3547' }}">
+                                    {{ $total_criterio_1 }}%</h2>
+                                <p>Puntaje eje de evaluación: <span class="text-danger">16.667 -> 100%</span></p>
+                            </div>
                         </div>
-                        <div class="col-sm-8">
-                            <h2 style="font-size: 40px; color:{{ $total_criterio_1 >= 80 ? '#00c851' : '#ff3547' }}">
-                                {{ $total_criterio_1 }}%</h2>
-                            <p>Puntaje eje de evaluación: <span class="text-danger">16.667 -> 100%</span></p>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                                style="width: {{ $total_criterio_1 }}%; background-color: {{ $total_criterio_1 >= 80 ? '#00c851' : '#ff3547' }};"
+                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{ $total_criterio_1 }}%</div>
                         </div>
-                    </div>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-                            style="width: {{ $total_criterio_1 }}%; background-color: {{ $total_criterio_1 >= 80 ? '#00c851' : '#ff3547' }};"
-                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{ $total_criterio_1 }}%</div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="card mb-3">
-                <a href="{{ route('docencia.resultado', $evaluacion->id) }}">
-                    <div class="card-header text-white" style="background-color: #AD2E0D">DOCENCIA</div>
-                </a>
-                <div class="card-body pt-3" style="margin-top: 20px;">
-                    <div class="row text-center">
-                        <div class="col-sm-4">
-                            @if ($total_criterio_2 >= 80)
-                                <i class="bi bi-check-circle-fill text-actualizar" style="font-size: 40px"></i>
-                            @else
-                                <i class="bi bi-exclamation-circle-fill alerta" style="font-size: 40px"></i>
-                            @endif
+        @endcan
+        @can('criterio_2')
+            <div class="col-sm-4">
+                <div class="card mb-3">
+                    <a href="{{ route('docencia.resultado', $evaluacion->id) }}">
+                        <div class="card-header text-white" style="background-color: #AD2E0D">DOCENCIA</div>
+                    </a>
+                    <div class="card-body pt-3" style="margin-top: 20px;">
+                        <div class="row text-center">
+                            <div class="col-sm-4">
+                                @if ($total_criterio_2 >= 80)
+                                    <i class="bi bi-check-circle-fill text-actualizar" style="font-size: 40px"></i>
+                                @else
+                                    <i class="bi bi-exclamation-circle-fill alerta" style="font-size: 40px"></i>
+                                @endif
+                            </div>
+                            <div class="col-sm-8">
+                                <h2 style="font-size: 40px; color:{{ $total_criterio_2 >= 80 ? '#00c851' : '#ff3547' }}">
+                                    {{ $total_criterio_2 }}%</h2>
+                                <p>Puntaje eje de evaluación: <span class="text-danger">16.667 -> 100%</span></p>
+                            </div>
                         </div>
-                        <div class="col-sm-8">
-                            <h2 style="font-size: 40px; color:{{ $total_criterio_2 >= 80 ? '#00c851' : '#ff3547' }}">
-                                {{ $total_criterio_2 }}%</h2>
-                            <p>Puntaje eje de evaluación: <span class="text-danger">16.667 -> 100%</span></p>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                                style="width: {{ $total_criterio_2 }}%; background-color: {{ $total_criterio_2 >= 80 ? '#00c851' : '#ff3547' }};"
+                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{ $total_criterio_2 }}%</div>
                         </div>
-                    </div>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-                            style="width: {{ $total_criterio_2 }}%; background-color: {{ $total_criterio_2 >= 80 ? '#00c851' : '#ff3547' }};"
-                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{ $total_criterio_2 }}%</div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="card mb-3">
-                <a href="{{ route('personal.academico.resultado', $evaluacion->id) }}">
-                    <div class="card-header text-white" style="background-color: #287C27">ACADÉMICO, APOYO ACADÉMICO Y
-                        ESTUDIANTES</div>
-                </a>
-                <div class="card-body pt-3" style="margin-top: 20px;">
-                    <div class="row text-center">
-                        <div class="col-sm-4">
-                            @if ($total_criterio_3 >= 80)
-                                <i class="bi bi-check-circle-fill text-actualizar" style="font-size: 40px"></i>
-                            @else
-                                <i class="bi bi-exclamation-circle-fill alerta" style="font-size: 40px"></i>
-                            @endif
+        @endcan
+        @can('criterio_3')
+            <div class="col-sm-4">
+                <div class="card mb-3">
+                    <a href="{{ route('personal.academico.resultado', $evaluacion->id) }}">
+                        <div class="card-header text-white" style="background-color: #287C27">ACADÉMICO, APOYO ACADÉMICO Y
+                            ESTUDIANTES</div>
+                    </a>
+                    <div class="card-body pt-3" style="margin-top: 20px;">
+                        <div class="row text-center">
+                            <div class="col-sm-4">
+                                @if ($total_criterio_3 >= 80)
+                                    <i class="bi bi-check-circle-fill text-actualizar" style="font-size: 40px"></i>
+                                @else
+                                    <i class="bi bi-exclamation-circle-fill alerta" style="font-size: 40px"></i>
+                                @endif
+                            </div>
+                            <div class="col-sm-8">
+                                <h2 style="font-size: 40px; color:{{ $total_criterio_3 >= 80 ? '#00c851' : '#ff3547' }}">
+                                    {{ $total_criterio_3 }}%</h2>
+                                <p>Puntaje eje de evaluación: <span class="text-danger">16.667 -> 100%</span></p>
+                            </div>
                         </div>
-                        <div class="col-sm-8">
-                            <h2 style="font-size: 40px; color:{{ $total_criterio_3 >= 80 ? '#00c851' : '#ff3547' }}">
-                                {{ $total_criterio_3 }}%</h2>
-                            <p>Puntaje eje de evaluación: <span class="text-danger">16.667 -> 100%</span></p>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                                style="width: {{ $total_criterio_3 }}%; background-color: {{ $total_criterio_3 >= 80 ? '#00c851' : '#ff3547' }};"
+                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{ $total_criterio_3 }}%</div>
                         </div>
-                    </div>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-                            style="width: {{ $total_criterio_3 }}%; background-color: {{ $total_criterio_3 >= 80 ? '#00c851' : '#ff3547' }};"
-                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{ $total_criterio_3 }}%</div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="card mb-3">
-                <a href="{{ route('investigacion.resultado', $evaluacion->id) }}">
-                    <div class="card-header text-white" style="background-color: #7A287C">INVESTIGACIÓN E INNOVACIÓN</div>
-                </a>
-                <div class="card-body pt-3" style="margin-top: 20px;">
-                    <div class="row text-center">
-                        <div class="col-sm-4">
-                            @if ($total_criterio_4 >= 80)
-                                <i class="bi bi-check-circle-fill text-actualizar" style="font-size: 40px"></i>
-                            @else
-                                <i class="bi bi-exclamation-circle-fill alerta" style="font-size: 40px"></i>
-                            @endif
+        @endcan
+        @can('criterio_4')
+            <div class="col-sm-4">
+                <div class="card mb-3">
+                    <a href="{{ route('investigacion.resultado', $evaluacion->id) }}">
+                        <div class="card-header text-white" style="background-color: #7A287C">INVESTIGACIÓN E INNOVACIÓN</div>
+                    </a>
+                    <div class="card-body pt-3" style="margin-top: 20px;">
+                        <div class="row text-center">
+                            <div class="col-sm-4">
+                                @if ($total_criterio_4 >= 80)
+                                    <i class="bi bi-check-circle-fill text-actualizar" style="font-size: 40px"></i>
+                                @else
+                                    <i class="bi bi-exclamation-circle-fill alerta" style="font-size: 40px"></i>
+                                @endif
+                            </div>
+                            <div class="col-sm-8">
+                                <h2 style="font-size: 40px; color:{{ $total_criterio_4 >= 80 ? '#00c851' : '#ff3547' }}">
+                                    {{ $total_criterio_4 }}%</h2>
+                                <p>Puntaje eje de evaluación: <span class="text-danger">16.667 -> 100%</span></p>
+                            </div>
                         </div>
-                        <div class="col-sm-8">
-                            <h2 style="font-size: 40px; color:{{ $total_criterio_4 >= 80 ? '#00c851' : '#ff3547' }}">
-                                {{ $total_criterio_4 }}%</h2>
-                            <p>Puntaje eje de evaluación: <span class="text-danger">16.667 -> 100%</span></p>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                                style="width: {{ $total_criterio_4 }}%; background-color: {{ $total_criterio_4 >= 80 ? '#00c851' : '#ff3547' }};"
+                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{ $total_criterio_4 }}%</div>
                         </div>
-                    </div>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-                            style="width: {{ $total_criterio_4 }}%; background-color: {{ $total_criterio_4 >= 80 ? '#00c851' : '#ff3547' }};"
-                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{ $total_criterio_4 }}%</div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="card mb-3">
-                <a href="{{ route('vinculacion.resultado', $evaluacion->id) }}">
-                    <div class="card-header text-white" style="background-color: #967a02">VINCULACIÓN CON LA SOCIEDAD
-                    </div>
-                </a>
-                <div class="card-body pt-3" style="margin-top: 20px;">
-                    <div class="row text-center">
-                        <div class="col-sm-4">
-                            @if ($total_criterio_5 >= 80)
-                                <i class="bi bi-check-circle-fill text-actualizar" style="font-size: 40px"></i>
-                            @else
-                                <i class="bi bi-exclamation-circle-fill alerta" style="font-size: 40px"></i>
-                            @endif
+        @endcan
+        @can('criterio_5')
+            <div class="col-sm-4">
+                <div class="card mb-3">
+                    <a href="{{ route('vinculacion.resultado', $evaluacion->id) }}">
+                        <div class="card-header text-white" style="background-color: #967a02">VINCULACIÓN CON LA SOCIEDAD
                         </div>
-                        <div class="col-sm-8">
-                            <h2 style="font-size: 40px; color:{{ $total_criterio_5 >= 80 ? '#00c851' : '#ff3547' }}">
-                                {{ $total_criterio_5 }}%</h2>
-                            <p>Puntaje eje de evaluación: <span class="text-danger">16.667 -> 100%</span></p>
+                    </a>
+                    <div class="card-body pt-3" style="margin-top: 20px;">
+                        <div class="row text-center">
+                            <div class="col-sm-4">
+                                @if ($total_criterio_5 >= 80)
+                                    <i class="bi bi-check-circle-fill text-actualizar" style="font-size: 40px"></i>
+                                @else
+                                    <i class="bi bi-exclamation-circle-fill alerta" style="font-size: 40px"></i>
+                                @endif
+                            </div>
+                            <div class="col-sm-8">
+                                <h2 style="font-size: 40px; color:{{ $total_criterio_5 >= 80 ? '#00c851' : '#ff3547' }}">
+                                    {{ $total_criterio_5 }}%</h2>
+                                <p>Puntaje eje de evaluación: <span class="text-danger">16.667 -> 100%</span></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-                            style="width: {{ $total_criterio_5 }}%; background-color: {{ $total_criterio_5 >= 80 ? '#00c851' : '#ff3547' }};"
-                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{ $total_criterio_5 }}%</div>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                                style="width: {{ $total_criterio_5 }}%; background-color: {{ $total_criterio_5 >= 80 ? '#00c851' : '#ff3547' }};"
+                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{ $total_criterio_5 }}%</div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="card mb-3">
-                <a href="{{ route('gestion.calidad.resultado', $evaluacion->id) }}">
-                    <div class="card-header text-white" style="background-color: #39389E">SISTEMA DE GESTIÓN DE LA CALIDAD
-                    </div>
-                </a>
-                <div class="card-body pt-3" style="margin-top: 20px;">
-                    <div class="row text-center">
-                        <div class="col-sm-4">
-                            @if ($total_criterio_6 >= 80)
-                                <i class="bi bi-check-circle-fill text-actualizar" style="font-size: 40px"></i>
-                            @else
-                                <i class="bi bi-exclamation-circle-fill alerta" style="font-size: 40px"></i>
-                            @endif
+        @endcan
+        @can('criterio_6')
+            <div class="col-sm-4">
+                <div class="card mb-3">
+                    <a href="{{ route('gestion.calidad.resultado', $evaluacion->id) }}">
+                        <div class="card-header text-white" style="background-color: #39389E">SISTEMA DE GESTIÓN DE LA CALIDAD
                         </div>
-                        <div class="col-sm-8">
-                            <h2 style="font-size: 40px; color:{{ $total_criterio_6 >= 80 ? '#00c851' : '#ff3547' }}">
-                                {{ $total_criterio_6 }}%</h2>
-                            <p>Puntaje eje de evaluación: <span class="text-danger">16.667 -> 100%</span></p>
+                    </a>
+                    <div class="card-body pt-3" style="margin-top: 20px;">
+                        <div class="row text-center">
+                            <div class="col-sm-4">
+                                @if ($total_criterio_6 >= 80)
+                                    <i class="bi bi-check-circle-fill text-actualizar" style="font-size: 40px"></i>
+                                @else
+                                    <i class="bi bi-exclamation-circle-fill alerta" style="font-size: 40px"></i>
+                                @endif
+                            </div>
+                            <div class="col-sm-8">
+                                <h2 style="font-size: 40px;  color:{{ $total_criterio_6 >= 80 ? '#00c851' : '#ff3547' }}">
+                                    {{ $total_criterio_6 }}%</h2>
+                                <p>Puntaje eje de evaluación: <span class="text-danger">16.667 -> 100%</span></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-                            style="width: {{ $total_criterio_6 }}%; background-color: {{ $total_criterio_6 >= 80 ? '#00c851' : '#ff3547' }};"
-                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{ $total_criterio_6 }}%</div>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                                style="width: {{ $total_criterio_6 }}%; background-color: {{ $total_criterio_6 >= 80 ? '#00c851' : '#ff3547' }};"
+                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{ $total_criterio_6 }}%</div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        @endcan
     </div>
 
 @endsection

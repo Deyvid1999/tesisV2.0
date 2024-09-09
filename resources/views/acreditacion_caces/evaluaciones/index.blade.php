@@ -16,34 +16,30 @@
             <h6 class="fw-normal text-pacifico text-uppercase">Evaluaciones</h6>
         </div>
         <div class="card-body mt-3">
-            <div class="row justify-content-between">
-                <div class="col-md-3">
-                    <button type="button" class="btn btn-outline-pacifico mb-4 btn-sm" data-bs-toggle="modal"
-                        data-bs-target="#crear">NUEVO REGISTRO</button>
-                    {{-- <form method="POST" action="{{ url('evaluaciones') }}" enctype="multipart/form-data">
-                        @csrf
-                        <input type="hidden" name="universidad_id" value="{{ $universidad->id }}">
-                        <button type="submit" class="btn btn-outline-pacifico mb-4 btn-sm">
-                            NUEVO EVALUACIÓN</button>
-                    </form> --}}
+            @can('admin')
+                <div class="row justify-content-between">
+                    <div class="col-md-3">
+                        <button type="button" class="btn btn-outline-pacifico mb-4 btn-sm" data-bs-toggle="modal"
+                            data-bs-target="#crear">NUEVO REGISTRO</button>
+                    </div>
+                    <div class="col-md-4">
+                        @if ($message = Session::get('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <i class="bi bi-check-circle me-1"></i>
+                                {{ $message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
+                        @if ($message = Session::get('error'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <i class="bi bi-check-circle me-1"></i>
+                                {{ $message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    @if ($message = Session::get('success'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <i class="bi bi-check-circle me-1"></i>
-                            {{ $message }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    @endif
-                    @if ($message = Session::get('error'))
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <i class="bi bi-check-circle me-1"></i>
-                            {{ $message }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    @endif
-                </div>
-            </div>
+            @endcan
             <!-- Tabla -->
             <div class="table-responsive">
                 <table id="universidad" class="table table-hover align-middle text-uppercase pt-2 pb-2">

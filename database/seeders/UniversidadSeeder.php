@@ -16,17 +16,17 @@ class UniversidadSeeder extends Seeder
     public function run()
     {
         Universidad::create([
-            'universidad' => 'UNIVERSIDAD DEL PACIFICO',
-            'foto' => 'uploads/universidades/UNIVERSIDAD DEL PACIFICO//foto.jpg',
+            'universidad' => 'UNIVERSIDAD DE LAS FUERZAS ARMADAS ESPE',
+            'foto' => '',
             'campus' => 'QUITO',
             'sede' => 'QUITO',
             'ciudad' => 'QUITO',
             'facultad' => 'FACULTAD DE CIENCIAS ADMINISTRATIVAS Y ECONOMICAS',
             'departamento' => 'ADMINISTRACION DE EMPRESAS',
-            'fecha_evaluacion' => '2021-01-01',
-            'evaluadores' => 'ING. JUAN PEREZ',
-            'contraparte' => 'ING. JUAN PEREZ',
-            'informe' => 'uploads/universidades/UPACIFICO/informe.pdf',
+            'fecha_evaluacion' => '2024-08-21',
+            'evaluadores' => 'ING. MARCELO REA',
+            'contraparte' => 'ING. MARCELO REA',
+            'informe' => '',
         ]);
     }
 }

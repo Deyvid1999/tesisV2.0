@@ -18,6 +18,10 @@ use App\Http\Controllers\UniversidadController;
 use App\Http\Controllers\VinculacionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\RegisterController; 
+use App\Http\Controllers\Admin\CriteriaAssignmentsController;
+use App\Http\Controllers\Admin\UserHasCriterioController;
+use App\Models\UserHasCriterio;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +35,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
 Auth::routes();
@@ -57,16 +61,16 @@ Route::middleware('auth')->get('historico/{id}', [HistoricoController::class, 'i
 // INDICADORES
 Route::middleware('auth')->get('indicadores/{id}', [IndicadorController::class, 'index'])->name('indicadores.index');
 // CRITERIOS
-Route::middleware('auth')->get('condiciones-institucionales/{id}', [CondicionesInstitucionalesController::class, 'index'])->name('condiciones.institucionales.index');
-Route::middleware('auth')->post('condiciones-institucionales', [CondicionesInstitucionalesController::class, 'store'])->name('condiciones.institucionales.store');
-Route::middleware('auth')->get('docencia/{id}', [DocenciaController::class, 'index'])->name('docencia.index');
-Route::middleware('auth')->post('docencia', [DocenciaController::class, 'store'])->name('docencia.store');
-Route::middleware('auth')->get('personal-academico/{id}', [PersonalAcademicoController::class, 'index'])->name('personal.academico.index');
-Route::middleware('auth')->get('investigacion/{id}', [InvestigacionController::class, 'index'])->name('investigacion.index');
-Route::middleware('auth')->get('vinculacion/{id}', [VinculacionController::class, 'index'])->name('vinculacion.index');
-Route::middleware('auth')->post('vinculacion', [VinculacionController::class, 'store'])->name('vinculacion.store');
-Route::middleware('auth')->get('gestion-calidad/{id}', [GestionCalidadController::class, 'index'])->name('gestion.calidad.index');
-Route::middleware('auth')->post('gestion-calidad', [GestionCalidadController::class, 'store'])->name('gestion.calidad.store');
+// Route::middleware('auth')->get('condiciones-institucionales/{id}', [CondicionesInstitucionalesController::class, 'index'])->name('condiciones.institucionales.index');
+// Route::middleware('auth')->post('condiciones-institucionales', [CondicionesInstitucionalesController::class, 'store'])->name('condiciones.institucionales.store');
+// Route::middleware('auth')->get('docencia/{id}', [DocenciaController::class, 'index'])->name('docencia.index');
+// Route::middleware('auth')->post('docencia', [DocenciaController::class, 'store'])->name('docencia.store');
+// Route::middleware('auth')->get('personal-academico/{id}', [PersonalAcademicoController::class, 'index'])->name('personal.academico.index');
+// Route::middleware('auth')->get('investigacion/{id}', [InvestigacionController::class, 'index'])->name('investigacion.index');
+// Route::middleware('auth')->get('vinculacion/{id}', [VinculacionController::class, 'index'])->name('vinculacion.index');
+// Route::middleware('auth')->post('vinculacion', [VinculacionController::class, 'store'])->name('vinculacion.store');
+// Route::middleware('auth')->get('gestion-calidad/{id}', [GestionCalidadController::class, 'index'])->name('gestion.calidad.index');
+// Route::middleware('auth')->post('gestion-calidad', [GestionCalidadController::class, 'store'])->name('gestion.calidad.store');
 
 //INFORMES
 Route::middleware('auth')->get('informes-criterios/{id}', [InformesCriteriosController::class, 'index'])->name('informes.criterios.index');
@@ -92,3 +96,13 @@ Route::middleware('auth')->get('criterio-3/{id}', [Criterio1Controller::class, '
 Route::middleware('auth')->get('criterio-4/{id}', [Criterio1Controller::class, 'criterio4'])->name('criterio_4');
 Route::middleware('auth')->get('criterio-5/{id}', [Criterio1Controller::class, 'criterio5'])->name('criterio_5');
 Route::middleware('auth')->get('criterio-6/{id}', [Criterio1Controller::class, 'criterio6'])->name('criterio_6');
+
+Route::middleware('auth')->post('register', [RegisterController::class,'create'])->name('create_user');
+
+Route::middleware('auth')->resource('criteria-assignments', CriteriaAssignmentsController::class)->names('criteria.assignments')->except('show');
+Route::middleware('auth')->get('criteria-assignments/{id}', [CriteriaAssignmentsController::class,'index'])->name('criteria.assignments.index');
+
+Route::middleware('auth')->resource('criteria-assignments', CriteriaAssignmentsController::class)->names('criteria.assignments');
+
+
+

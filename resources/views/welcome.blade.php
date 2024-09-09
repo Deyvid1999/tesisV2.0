@@ -54,7 +54,6 @@
             <nav id="navbar" class="navbar">
                 <ul>
                     <li><a class="getstarted scrollto" href="{{ route('login') }}">Ingresar</a></li>
-                    <li><a class="getstarted scrollto" href="{{ route('register') }}">Registrarse</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
@@ -70,7 +69,7 @@
                 <div class="col-lg-8 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
                     data-aos="fade-up" data-aos-delay="200">
                     <h1>
-                        Acreditación de las UNIVERSIDADES Y ESCUELAS POLITÉCNICAS 2023
+                        Acreditación de las UNIVERSIDADES Y ESCUELAS POLITÉCNICAS
                     </h1>
                     <h2>Automatización y excelencia académica en una sola plataforma. Únete al futuro de la acreditación
                         universitaria.
@@ -87,8 +86,6 @@
                 <div class="col-sm-8">
                     <div class="d-flex justify-content-center justify-content-lg-start">
                         <a href="{{ route('login') }}" class="btn-get-started scrollto">Ingresar</a>
-                        <a href="assets/img/VIDEO.MP4" class="glightbox btn-watch-video"><i
-                                class="bi bi-play-circle"></i><span>Ver video</span></a>
                     </div>
                 </div>
             </div>

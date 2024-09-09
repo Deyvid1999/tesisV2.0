@@ -17,12 +17,14 @@
         </div>
         <div class="card-body mt-3">
             <div class="row justify-content-between">
-                <div class="col-md-3">
-                    <a type="button" class="btn btn-outline-pacifico mb-4 btn-sm"
-                        href="{{ route('universidades.create') }}">
-                        NUEVO REGISTRO
-                    </a>
-                </div>
+                @can('admin')
+                    <div class="col-md-3">
+                        <a type="button" class="btn btn-outline-pacifico mb-4 btn-sm"
+                            href="{{ route('universidades.create') }}">
+                            NUEVO REGISTRO
+                        </a>
+                    </div>
+                @endcan
                 <div class="col-md-4">
                     @if ($message = Session::get('success'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -107,17 +109,21 @@
                                 </td>
                                 <td style="width: 160px;">
                                     <div class="nav fs-6">
-                                        <a type="button" class="nav-link text-actualizar" title="Editar"
-                                            href="{{ route('universidades.edit', $universidad->id) }}">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </a>
-                                        <form action="{{ route('universidades.destroy', $universidad->id) }}"
-                                            method="POST" class="d-inline formulario-eliminar">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn text-eliminar" title="Borrar"><i
-                                                    class="bi bi-trash"></i></button>
-                                        </form>
+                                        @can('admin')
+                                            <a type="button" class="nav-link text-actualizar" title="Editar"
+                                                href="{{ route('universidades.edit', $universidad->id) }}">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
+                                        @endcan
+                                        @can('admin')
+                                            <form action="{{ route('universidades.destroy', $universidad->id) }}"
+                                                method="POST" class="d-inline formulario-eliminar">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn text-eliminar" title="Borrar"><i
+                                                        class="bi bi-trash"></i></button>
+                                            </form>
+                                        @endcan
                                         <a type="button" class="nav-link text-crear" title="Ingresar"
                                             href="{{ route('evaluaciones.index', $universidad->id) }}">
                                             <i class="bi bi-box-arrow-in-right"></i>

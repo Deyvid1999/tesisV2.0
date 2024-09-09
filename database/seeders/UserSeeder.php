@@ -16,25 +16,23 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $users = [
-            [
-                'name' => 'Marco Guevara',
-                'email' => 'marco.guevara@upacifico.edu.ec',
-                'password' => Hash::make('Marco.2023'),
-            ],
-            [
-                'name' => 'andres',
-                'email' => 'andres.valarezo@upacifico.edu.ec',
-                'password' => Hash::make('agvc2001')
-            ],
-            [
-                'name' => 'Luis',
-                'email' => 'luis.vasquez@upacifico.edu.ec',
-                'password' => '$2y$10$A8RdNDOgFTXgF6wnZ65vGOvdhPO9KFCINF6T2ZrWnpfZfIyOANayO'
-            ],
+        $user1 = [
+            'name' => 'ERICK GERMAN RIASCOS MORENO',
+            'email' => 'egriascos@espe.edu.ec',
+            'password' => Hash::make('12345678'),
         ];
-        foreach ($users as $user) {
-            User::create($user);
-        }
+        $user2 = [
+            'name' => 'DEYVID ANDRES IBARRA BASANTES',
+            'email' => 'daibarra@espe.edu.ec',
+            'password' => Hash::make('12345678'),
+        ];
+        $user3 = [
+            'name' => 'ROSA LUCRECIA MORENO JAYA',
+            'email' => 'rlmoreno@espe.edu.ec',
+            'password' => Hash::make('12345678'),
+        ];
+        User::create($user1)->assignRole('Admin');
+        User::create($user2)->assignRole('CriteriaR');
+        User::create($user3)->assignRole('IndicatorR');
     }
 }
