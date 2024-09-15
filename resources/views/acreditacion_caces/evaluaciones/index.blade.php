@@ -46,12 +46,11 @@
                     <thead class="table-pacifico">
                         <tr>
                             <th scope="col">No</th>
-                            <th scope="col">UNIVERSIDAD</th>
                             <th scope="col">FECHA DE CREACIÓN</th>
                             <th scope="col">PERÍODO</th>
                             <th scope="col">ADMINISTRADOR</th>
-                            <th scope="col">FACULTAD</th>
                             <th scope="col">DEPARTAMENTO</th>
+                            <th scope="col">FACULTAD</th>
                             <th scope="col">ACCIONES</th>
                         </tr>
                     </thead>
@@ -62,22 +61,19 @@
                                     {{ $loop->iteration }}
                                 </td>
                                 <td>
-                                    {{ $evaluacion->universidad->universidad }}
-                                </td>
-                                <td>
                                     {{ \Carbon\Carbon::parse($evaluacion->fecha_creacion)->format('d-m-Y') }}
                                 </td>
                                 <td>
                                     {{ \Carbon\Carbon::parse($evaluacion->fecha_inicial)->format('d-m-Y') }} - {{ \Carbon\Carbon::parse($evaluacion->fecha_final)->format('d-m-Y') }}
                                 </td>
                                 <td>
-                                    {{ $evaluacion->user->name }}
-                                </td>
-                                <td>
-                                    {{ $evaluacion->facultad }}
+                                    {{ $evaluacion->administrador }}
                                 </td>
                                 <td>
                                     {{ $evaluacion->departamento }}
+                                </td>
+                                <td>
+                                    {{ $evaluacion->facultad }}
                                 </td>
                                 <td style="width: 160px;">
                                     <div class="nav fs-6">

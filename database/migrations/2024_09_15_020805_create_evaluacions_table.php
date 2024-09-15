@@ -18,16 +18,13 @@ class CreateEvaluacionsTable extends Migration
             $table->date('fecha_creacion')->nullable();
             $table->date('fecha_inicial')->nullable();
             $table->date('fecha_final')->nullable();
-            $table->unsignedInteger('res_id');
             $table->unsignedInteger('uni_id');
-            $table->unsignedInteger('user_id');
             $table->integer('informe')->nullable();
             $table->unsignedInteger('administrador');
-            $table->integer('facultad')->nullable();
-            $table->integer('departamento')->nullable();
+            $table->string('facultad',254)->nullable();
+            $table->string('departamento',254)->nullable();
             $table->timestamps();
 
-            //$table->foreign('res_id', 'FK_association2')->references('id')->on('resultados');
             $table->foreign('uni_id', 'FK_evaluacionsUniversidadIdForeign')->references('id')->on('universidads');
         });
     }

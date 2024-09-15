@@ -22,8 +22,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $user_id
  * @property int|null $informe
  * @property int|null $evaluador
- * @property int|null $facultad
- * @property int|null $departamento
+ * @property string|null $facultad
+ * @property string|null $departamento
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * 
@@ -47,8 +47,8 @@ class Evaluacion extends Model
 		'user_id' => 'int',
 		'informe' => 'int',
 		'evaluador' => 'int',
-		'facultad' => 'int',
-		'departamento' => 'int'
+		'facultad' => 'string',
+		'departamento' => 'string'
 	];
 
 	protected $fillable = [
