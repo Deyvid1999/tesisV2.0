@@ -23,10 +23,7 @@ class UniversidadController extends Controller
     {
 
         $universidad = $request->except('_token');
-        $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-        $randomCode = substr(str_shuffle($characters), 0, 8);
-        $universidad['codigo_unico'] = $randomCode;
-
+        
         $uni = $request->universidad;
 
         if ($request->hasFile('foto')) {

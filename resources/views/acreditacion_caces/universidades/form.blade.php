@@ -28,36 +28,7 @@
             onkeyup="this.value = this.value.toUpperCase();"
             value="{{ isset($universidad->ciudad) ? $universidad->ciudad : old('ciudad') }}">
     </div>
-    <div class="col-sm-4 mb-3">
-        <label for="facultad" class="form-label">Facultad<samp class="text-eliminar">*</samp></label>
-        <input type="text" class="form-control" name="facultad" id="facultad" required
-            onkeyup="this.value = this.value.toUpperCase();"
-            value="{{ isset($universidad->facultad) ? $universidad->facultad : old('facultad') }}">
-    </div>
-    <div class="col-sm-4 mb-3">
-        <label for="departamento" class="form-label">Departamento<samp class="text-eliminar">*</samp></label>
-        <input type="text" class="form-control" name="departamento" id="departamento" required
-            onkeyup="this.value = this.value.toUpperCase();"
-            value="{{ isset($universidad->departamento) ? $universidad->departamento : old('departamento') }}">
-    </div>
-    <div class="col-sm-4 mb-3">
-        <label for="fecha_evaluacion" class="form-label">Fecha de evaluación<samp class="text-eliminar">*</samp></label>
-        <input type="date" class="form-control" name="fecha_evaluacion" id="fecha_evaluacion" required
-            value="{{ isset($universidad->fecha_evaluacion) ? $universidad->fecha_evaluacion : old('fecha_evaluacion') }}">
-    </div>
-    <div class="col-sm-12 mb-3">
-        <label for="evaluadores" class="form-label">Evaluador<samp class="text-eliminar">*</samp></label>
-        <input type="text" class="form-control" name="evaluadores" id="evaluadores" required
-            onkeyup="this.value = this.value.toUpperCase();"
-            value="{{ isset($universidad->evaluadores) ? $universidad->evaluadores : old('evaluadores') }}">
-    </div>
-    <div class="col-sm-12 mb-3">
-        <label for="contraparte" class="form-label">Contraparte<samp class="text-eliminar">*</samp></label>
-        <input type="text" class="form-control" name="contraparte" id="contraparte" required
-            onkeyup="this.value = this.value.toUpperCase();"
-            value="{{ isset($universidad->contraparte) ? $universidad->contraparte : old('contraparte') }}">
-    </div>
-    <div class="col-sm-12 mb-3">
+        <div class="col-sm-12 mb-3">
         <div class="form-group">
             <label class="form-label">Informe
                 @isset($universidad)

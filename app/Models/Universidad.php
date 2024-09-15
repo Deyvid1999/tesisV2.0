@@ -38,7 +38,8 @@ class Universidad extends Model
 		'campus',
 		'sede',
 		'ciudad',
-		'informe'
+		'informe',
+		'acciones'
 	];
 
 	public function evaluacions()

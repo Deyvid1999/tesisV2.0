@@ -48,17 +48,14 @@
                     <thead class="table-pacifico">
                         <tr>
                             <th scope="col">No</th>
+                            <th scope="col">FOTO</th>
                             <th scope="col">UNIVERSIDAD</th>
                             <th scope="col">CAMPUS</th>
                             <th scope="col">SEDE</th>
                             <th scope="col">CIUDAD</th>
-                            <th scope="col">FACULTAD</th>
-                            <th scope="col">DEPARTAMENTO</th>
-                            <th scope="col">FECHA</th>
-                            <th scope="col">EVALUADORES</th>
-                            <th scope="col">CONTRAPARTE</th>
                             <th scope="col">INFORME</th>
                             <th scope="col">ACCIONES</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -66,6 +63,9 @@
                             <tr>
                                 <td>
                                     {{ $loop->iteration }}
+                                </td>
+                                <td>
+                                    {{ $universidad->foto }}
                                 </td>
                                 <td>
                                     {{ $universidad->universidad }}
@@ -78,21 +78,6 @@
                                 </td>
                                 <td>
                                     {{ $universidad->ciudad }}
-                                </td>
-                                <td>
-                                    {{ $universidad->facultad }}
-                                </td>
-                                <td>
-                                    {{ $universidad->departamento }}
-                                </td>
-                                <td>
-                                    {{ $universidad->fecha_evaluacion }}
-                                </td>
-                                <td>
-                                    {{ $universidad->evaluadores }}
-                                </td>
-                                <td>
-                                    {{ $universidad->contraparte }}
                                 </td>
                                 <td class="text-center">
                                     @isset($universidad)
@@ -107,6 +92,7 @@
                                         @endif
                                     @endisset
                                 </td>
+                                
                                 <td style="width: 160px;">
                                     <div class="nav fs-6">
                                         @can('admin')
