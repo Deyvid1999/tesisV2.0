@@ -22,8 +22,6 @@ class CreateUsersTable extends Migration
             $table->string('password', 200)->nullable();
             $table->rememberToken();
             $table->timestamps();
-
-            $table->foreign('eva_id', 'FK_association_13')->references('id')->on('evaluacions');
         });
     }
 
