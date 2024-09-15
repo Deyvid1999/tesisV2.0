@@ -22,7 +22,7 @@ class CreateEvaluacionsTable extends Migration
             $table->unsignedInteger('uni_id');
             $table->unsignedInteger('user_id');
             $table->integer('informe')->nullable();
-            $table->unsignedInteger('evaluador');
+            $table->unsignedInteger('administrador');
             $table->integer('facultad')->nullable();
             $table->integer('departamento')->nullable();
             $table->timestamps();

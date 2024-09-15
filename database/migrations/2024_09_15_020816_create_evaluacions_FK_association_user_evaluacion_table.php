@@ -14,7 +14,7 @@ class CreateEvaluacionsFKAssociationUserEvaluacionTable extends Migration
     public function up()
     {
         Schema::table('evaluacions', function (Blueprint $table) {
-            $table->foreign('evaluador', 'FK_association_user_evaluacion')->references('id')->on('users');
+            $table->foreign('administrador', 'FK_association_user_evaluacion')->references('id')->on('users');
         });
     }
 

@@ -49,7 +49,9 @@
                             <th scope="col">UNIVERSIDAD</th>
                             <th scope="col">FECHA DE CREACIÓN</th>
                             <th scope="col">PERÍODO</th>
-                            <th scope="col">RESPONSABLE</th>
+                            <th scope="col">ADMINISTRADOR</th>
+                            <th scope="col">FACULTAD</th>
+                            <th scope="col">DEPARTAMENTO</th>
                             <th scope="col">ACCIONES</th>
                         </tr>
                     </thead>
@@ -71,19 +73,14 @@
                                 <td>
                                     {{ $evaluacion->user->name }}
                                 </td>
+                                <td>
+                                    {{ $evaluacion->facultad }}
+                                </td>
+                                <td>
+                                    {{ $evaluacion->departamento }}
+                                </td>
                                 <td style="width: 160px;">
                                     <div class="nav fs-6">
-                                        {{-- <a type="button" class="nav-link text-actualizar" title="Editar"
-                                            href="{{ route('evaluacion.edit', $universidad->id) }}">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </a>
-                                        <form action="{{ route('evaluacion.destroy', $evaluacion->id) }}" method="POST"
-                                            class="d-inline formulario-eliminar">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn text-eliminar" title="Borrar"><i
-                                                    class="bi bi-trash"></i></button>
-                                        </form> --}}
                                         <a type="button" class="nav-link text-crear" title="Ingresar"
                                             href="{{ route('indicadores.index', $evaluacion->id) }}">
                                             <i class="fas fa-sign-in-alt"></i>
