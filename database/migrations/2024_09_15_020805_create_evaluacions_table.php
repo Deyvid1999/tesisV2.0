@@ -27,7 +27,7 @@ class CreateEvaluacionsTable extends Migration
             $table->integer('departamento')->nullable();
             $table->timestamps();
 
-            $table->foreign('res_id', 'FK_association2')->references('id')->on('resultados');
+            //$table->foreign('res_id', 'FK_association2')->references('id')->on('resultados');
             $table->foreign('uni_id', 'FK_evaluacionsUniversidadIdForeign')->references('id')->on('universidads');
         });
     }

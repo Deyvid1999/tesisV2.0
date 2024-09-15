@@ -27,7 +27,7 @@ class CreateResultadosTable extends Migration
             $table->integer('formula')->nullable();
             $table->timestamps();
 
-            $table->foreign('fue_id', 'FK_Relationship14')->references('id')->on('fuente_informacions');
+            //$table->foreign('fue_id', 'FK_Relationship14')->references('id')->on('fuente_informacions');
             $table->foreign('eva_id', 'FK_association_2')->references('id')->on('evaluacions');
             $table->foreign('for_id', 'FK_association_9')->references('id')->on('formulas');
         });

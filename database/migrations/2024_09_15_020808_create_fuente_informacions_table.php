@@ -23,7 +23,7 @@ class CreateFuenteInformacionsTable extends Migration
             
             $table->foreign('res_id', 'FK_Relationship_14')->references('id')->on('resultados');
             $table->foreign('arc_id', 'FK_association7')->references('id')->on('archivos');
-            $table->foreign('ele_id', 'FK_association_6')->references('id')->on('elemento_fundamentals');
+            //$table->foreign('ele_id', 'FK_association_6')->references('id')->on('elemento_fundamentals');
         });
     }
 

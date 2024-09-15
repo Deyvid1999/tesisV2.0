@@ -21,7 +21,7 @@ class CreateFormulasTable extends Migration
             $table->timestamps();
             
             $table->foreign('ind_id', 'FK_association8')->references('id')->on('indicadors');
-            $table->foreign('res_id', 'FK_association9')->references('id')->on('resultados');
+            //$table->foreign('res_id', 'FK_association9')->references('id')->on('resultados');
         });
     }
 
