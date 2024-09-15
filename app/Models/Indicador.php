@@ -1,108 +1,71 @@
 <?php
 
+/**
+ * Created by Reliese Model.
+ */
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Indicador
+ * 
+ * @property int $id
+ * @property int $sub_id
+ * @property int $subcriterio_id
+ * @property string|null $indicador
+ * @property string|null $estandar
+ * @property string|null $periodo
+ * @property float|null $porcentaje
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * 
+ * @property Subcriterio $subcriterio
+ * @property Collection|ElementoFundamental[] $elemento_fundamentals
+ * @property Collection|Formula[] $formulas
+ * @property Collection|User[] $users
+ *
+ * @package App\Models
+ */
 class Indicador extends Model
 {
-    use HasFactory;
+	protected $table = 'indicadors';
 
-    protected $guarded = [];
-    public function elementosFundamentales()
-    {
-        return $this->hasMany(ElementoFundamental::class);
-    }
+	protected $casts = [
+		'sub_id' => 'int',
+		'subcriterio_id' => 'int',
+		'porcentaje' => 'float'
+	];
 
-    public function fuentesInformaciones()
-    {
-        return $this->hasMany(FuenteInformacion::class);
-    }
+	protected $fillable = [
+		'sub_id',
+		'subcriterio_id',
+		'indicador',
+		'estandar',
+		'periodo',
+		'porcentaje'
+	];
 
-    public function resCondicionInstitucions()
-    {
-        return $this->hasMany(ResCondicionInstitucion::class);
-    }
+	public function subcriterio()
+	{
+		return $this->belongsTo(Subcriterio::class, 'sub_id');
+	}
 
-    public function resDocentes()
-    {
-        return $this->hasMany(ResDocente::class);
-    }
+	public function elemento_fundamentals()
+	{
+		return $this->hasMany(ElementoFundamental::class, 'ind_id');
+	}
 
-    public function resAcademicos()
-    {
-        return $this->hasMany(ResAcademico::class);
-    }
+	public function formulas()
+	{
+		return $this->hasMany(Formula::class, 'ind_id');
+	}
 
-    public function resInvestigacions()
-    {
-        return $this->hasMany(ResInvestigacion::class);
-    }
-
-    public function resVinculacions()
-    {
-        return $this->hasMany(ResVinculacion::class);
-    }
-
-    public function resGestionCalidads()
-    {
-        return $this->hasMany(ResGestionCalidad::class);
-    }
-
-    public function subcriterio()
-    {
-        return $this->belongsTo(Subcriterio::class, 'subcriterio_id');
-    }
-
-    public function criterio()
-    {
-        return $this->belongsTo(Criterio::class, 'criterio_id');
-    }
-
-
-    public function res_indicador29()
-    {
-        return $this->hasOne(ResIndicador29::class);
-    }
-
-    public function res_indicador_16()
-    {
-        return $this->hasMany(ResIndicador16::class);
-    }
-
-    public function res_indicador_17()
-    {
-        return $this->hasMany(ResIndicador17::class);
-    }
-
-    public function res_indicador_19()
-    {
-        return $this->hasMany(ResIndicador19::class);
-    }
-
-    public function res_indicador_21()
-    {
-        return $this->hasMany(ResIndicador21::class);
-    }
-
-    public function res_indicador_22()
-    {
-        return $this->hasMany(ResIndicador22::class);
-    }
-
-    public function res_indicador_25()
-    {
-        return $this->hasMany(ResIndicador25::class);
-    }
-
-    public function res_indicador_26()
-    {
-        return $this->hasMany(ResIndicador26::class);
-    }
-
-    public function res_indicador_29()
-    {
-        return $this->hasMany(ResIndicador29::class);
-    }
+	public function users()
+	{
+		return $this->belongsToMany(User::class, 'user_has_indicadors', 'ind_id', 'id');
+	}
 }

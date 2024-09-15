@@ -9,30 +9,30 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class UserHasCriterio
+ * Class UserHasUniversidad
  * 
- * @property int $cri_id
+ * @property int $uni_id
  * @property int $id
  * 
- * @property Criterio $criterio
+ * @property Universidad $universidad
  * @property User $user
  *
  * @package App\Models
  */
-class UserHasCriterio extends Model
+class UserHasUniversidad extends Model
 {
-	protected $table = 'user_has_criterios';
+	protected $table = 'user_has_universidads';
 	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
-		'cri_id' => 'int',
+		'uni_id' => 'int',
 		'id' => 'int'
 	];
 
-	public function criterio()
+	public function universidad()
 	{
-		return $this->belongsTo(Criterio::class, 'cri_id');
+		return $this->belongsTo(Universidad::class, 'uni_id');
 	}
 
 	public function user()

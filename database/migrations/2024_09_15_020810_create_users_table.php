@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->unsignedInteger('eva_id');
             $table->string('name', 200)->nullable();
             $table->string('email', 200)->nullable();
-            $table->timestamp('email_verified_at')->default('current_timestamp()');
+            $table->timestamp('email_verified_at')->nullable();
             $table->string('password', 200)->nullable();
             $table->rememberToken();
             $table->timestamps();

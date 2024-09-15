@@ -1,17 +1,53 @@
 <?php
 
+/**
+ * Created by Reliese Model.
+ */
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Universidad
+ * 
+ * @property int $id
+ * @property string|null $universidad
+ * @property string|null $foto
+ * @property string|null $campus
+ * @property string|null $sede
+ * @property string|null $ciudad
+ * @property string|null $informe
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * 
+ * @property Collection|Evaluacion[] $evaluacions
+ * @property Collection|User[] $users
+ *
+ * @package App\Models
+ */
 class Universidad extends Model
 {
-    use HasFactory;
-    protected $guarded = [];
+	protected $table = 'universidads';
 
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
+	protected $fillable = [
+		'universidad',
+		'foto',
+		'campus',
+		'sede',
+		'ciudad',
+		'informe'
+	];
+
+	public function evaluacions()
+	{
+		return $this->hasMany(Evaluacion::class, 'uni_id');
+	}
+
+	public function users()
+	{
+		return $this->belongsToMany(User::class, 'user_has_universidads', 'uni_id', 'id');
+	}
 }

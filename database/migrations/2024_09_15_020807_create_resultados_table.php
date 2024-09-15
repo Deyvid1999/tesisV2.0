@@ -13,7 +13,7 @@ class CreateResultadosTable extends Migration
      */
     public function up()
     {
-        Schema::table('resultados', function (Blueprint $table) {
+        Schema::create('resultados', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('for_id');
             $table->unsignedInteger('eva_id');
@@ -28,8 +28,8 @@ class CreateResultadosTable extends Migration
             $table->timestamps();
 
             //$table->foreign('fue_id', 'FK_Relationship14')->references('id')->on('fuente_informacions');
-            $table->foreign('eva_id', 'FK_association_2')->references('id')->on('evaluacions');
-            $table->foreign('for_id', 'FK_association_9')->references('id')->on('formulas');
+            //$table->foreign('eva_id', 'FK_association_2')->references('id')->on('evaluacions');
+            //$table->foreign('for_id', 'FK_association_9')->references('id')->on('formulas');
         });
     }
 

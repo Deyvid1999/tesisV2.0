@@ -13,7 +13,7 @@ class CreateFuenteInformacionsTable extends Migration
      */
     public function up()
     {
-        Schema::table('fuente_informacions', function (Blueprint $table) {
+        Schema::create('fuente_informacions', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('arc_id');
             $table->unsignedInteger('res_id');
@@ -21,7 +21,7 @@ class CreateFuenteInformacionsTable extends Migration
             $table->text('documento')->nullable();
             $table->timestamps();
             
-            $table->foreign('res_id', 'FK_Relationship_14')->references('id')->on('resultados');
+            //$table->foreign('res_id', 'FK_Relationship_14')->references('id')->on('resultados');
             $table->foreign('arc_id', 'FK_association7')->references('id')->on('archivos');
             //$table->foreign('ele_id', 'FK_association_6')->references('id')->on('elemento_fundamentals');
         });

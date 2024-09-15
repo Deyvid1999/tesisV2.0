@@ -21,8 +21,8 @@ class CreateElementoFundamentalsTable extends Migration
             $table->decimal('porcentaje', 8, 3)->nullable();
             $table->timestamps();
 
-            $table->foreign('ind_id', 'FK_association5')->references('id')->on('indicadors');
-            $table->foreign('fue_id', 'FK_association6')->references('id')->on('fuente_informacions');
+             $table->foreign('ind_id', 'FK_association5')->references('id')->on('indicadors');
+            // $table->foreign('fue_id', 'FK_association6')->references('id')->on('fuente_informacions');
         });
     }
 
