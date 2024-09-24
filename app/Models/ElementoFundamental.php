@@ -15,15 +15,13 @@ use Illuminate\Database\Eloquent\Model;
  * 
  * @property int $id
  * @property int $ind_id
- * @property int $fue_id
  * @property string|null $elemento
  * @property float|null $porcentaje
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * 
  * @property Indicador $indicador
- * @property FuenteInformacion $fuente_informacion
- * @property Collection|FuenteInformacion[] $fuente_informacions
+ * @property Collection|Resultado[] $resultados
  *
  * @package App\Models
  */
@@ -33,13 +31,10 @@ class ElementoFundamental extends Model
 
 	protected $casts = [
 		'ind_id' => 'int',
-		'fue_id' => 'int',
 		'porcentaje' => 'float'
 	];
 
 	protected $fillable = [
-		'ind_id',
-		'fue_id',
 		'elemento',
 		'porcentaje'
 	];
@@ -49,13 +44,8 @@ class ElementoFundamental extends Model
 		return $this->belongsTo(Indicador::class, 'ind_id');
 	}
 
-	public function fuente_informacion()
+	public function resultados()
 	{
-		return $this->belongsTo(FuenteInformacion::class, 'fue_id');
-	}
-
-	public function fuente_informacions()
-	{
-		return $this->hasMany(FuenteInformacion::class, 'ele_id');
+		return $this->hasMany(Resultado::class, 'ele_id');
 	}
 }

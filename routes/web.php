@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\CondicionesInstitucionalesController;
-use App\Http\Controllers\Criterio1Controller;
+use App\Http\Controllers\CriterioController;
 use App\Http\Controllers\DocenciaController;
 use App\Http\Controllers\EvaluacionController;
 use App\Http\Controllers\GestionCalidadController;
@@ -89,20 +89,15 @@ Route::middleware('auth')->get('personal-academico/excel/{id}', [PersonalAcademi
 Route::middleware('auth')->get('informes/informe-general/{id}', [InformesCriteriosController::class, 'informeGeneralPdf'])->name('personal.academico.informeGeneral');
 Route::middleware('auth')->get('informes/informe-especifico/{id}', [InformesCriteriosController::class, 'informeEspecificoPdf'])->name('personal.academico.informeEspecifico');
 
-//////////////////////////////////////////////////LIVEWIRE//////////////////////////////////////////////
-Route::middleware('auth')->get('criterio-1/{id}', [Criterio1Controller::class, 'criterio1'])->name('criterio_1');
-Route::middleware('auth')->get('criterio-2/{id}', [Criterio1Controller::class, 'criterio2'])->name('criterio_2');
-Route::middleware('auth')->get('criterio-3/{id}', [Criterio1Controller::class, 'criterio3'])->name('criterio_3');
-Route::middleware('auth')->get('criterio-4/{id}', [Criterio1Controller::class, 'criterio4'])->name('criterio_4');
-Route::middleware('auth')->get('criterio-5/{id}', [Criterio1Controller::class, 'criterio5'])->name('criterio_5');
-Route::middleware('auth')->get('criterio-6/{id}', [Criterio1Controller::class, 'criterio6'])->name('criterio_6');
 
 Route::middleware('auth')->post('register', [RegisterController::class,'create'])->name('create_user');
 
-Route::middleware('auth')->resource('criteria-assignments', CriteriaAssignmentsController::class)->names('criteria.assignments')->except('show');
-Route::middleware('auth')->get('criteria-assignments/{id}', [CriteriaAssignmentsController::class,'index'])->name('criteria.assignments.index');
+// Route::middleware('auth')->resource('criteria-assignments', CriteriaAssignmentsController::class)->names('criteria.assignments')->except('show');
+// Route::middleware('auth')->get('criteria-assignments/{id}', [CriteriaAssignmentsController::class,'index'])->name('criteria.assignments.index');
 
 Route::middleware('auth')->resource('criteria-assignments', CriteriaAssignmentsController::class)->names('criteria.assignments');
 
+//////////////////////////////////////////////////LIVEWIRE//////////////////////////////////////////////
+Route::middleware('auth')->get('{eva_id}/criterio/{cri_id}', [CriterioController::class, 'criterio'])->name('criterio');
 
 

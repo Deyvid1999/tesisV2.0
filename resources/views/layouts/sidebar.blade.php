@@ -1,5 +1,5 @@
 <li class="nav-item">
-    <a class="nav-link collapsed" id="inicio" href="{{ route('evaluaciones.index', $evaluacion->universidad->id) }}">
+    <a class="nav-link collapsed" id="inicio" href="{{ route('evaluaciones.index', $evaluacion->uni_id) }}">
         <i class="bi bi-arrow-return-left"></i><span>Regresar</span>
     </a>
 </li>
@@ -33,50 +33,19 @@
 @endcan
 <!-- ======= Sidebar ======= -->
 <li class="nav-heading">Criterios</li>
-@can('criterio_1')
-<li class="nav-item">
-    <a class="nav-link collapsed" id="criterio_1" href="{{ route('criterio_1', $evaluacion->id) }}">
-        <i class="bi bi-building"></i><span>Condiciones Institucionales</span>
-    </a>
-</li>
-@endcan
-@can('criterio_2')
-<li class="nav-item">
-    <a class="nav-link collapsed" id="criterio_2" href="{{ route('criterio_2', $evaluacion->id) }}">
-        <i class="bi bi-book"></i><span>Docencia</span>
-    </a>
-</li>
-@endcan
-@can('criterio_3')
-<li class="nav-item">
-    <a class="nav-link collapsed" id="criterio_3" href="{{ route('criterio_3', $evaluacion->id) }}">
-        <i class="bi bi-people"></i><span>Condiciones del Personal Académico, Apoyo Académico y Estudiantes
-        </span>
-    </a>
-</li>
-@endcan
-@can('criterio_4')
-<li class="nav-item">
-    <a class="nav-link collapsed" id="criterio_4" href="{{ route('criterio_4', $evaluacion->id) }}">
-        <i class="bi bi-lightbulb"></i><span>Investigación e Innovación
-        </span>
-    </a>
-</li>
-@endcan
-@can('criterio_5')
-<li class="nav-item">
-    <a class="nav-link collapsed" id="criterio_5" href="{{ route('criterio_5', $evaluacion->id) }}">
-        <i class="bi bi-link"></i><span>Vinculación con la Sociedad</span>
-    </a>
-</li>
-@endcan
-@can('criterio_6')
-<li class="nav-item">
-    <a class="nav-link collapsed" id="criterio_6" href="{{ route('criterio_6', $evaluacion->id) }}">
-        <i class="bi bi-trophy"></i><span>Sistema de Gestión de la Calidad</span>
-    </a>
-</li>
-@endcan
+@php
+$icons=['building','book','people','lightbulb','link','trophy'];
+@endphp
+@foreach ($criterios as $criterio )
+@can("criterio_$criterio->id")
+    <li class="nav-item">
+        <a class="nav-link collapsed" id="criterio_{{$criterio->id}}" href="{{ route('criterio', [$evaluacion->id,$criterio->id]) }}">
+            <i class="bi bi-{{$icons[$criterio->id-1]}}"></i><span>{{mb_convert_case($criterio->criterio,MB_CASE_TITLE, "UTF-8")}}</span>
+        </a>
+    </li>
+    @endcan
+
+@endforeach
 <!-- ======= Sidebar ======= -->
 <li>
     <hr class="modulo-divider">

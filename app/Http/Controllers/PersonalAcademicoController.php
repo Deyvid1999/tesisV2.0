@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\PersonalAcademicoExport;
 use App\Models\Criterio;
-use App\Models\EscalaCualitativo;
+use App\Models\Escala;
 use App\Models\Evaluacion;
 use App\Models\Subcriterio;
 use App\Models\Universidad;
@@ -23,7 +23,7 @@ class PersonalAcademicoController extends Controller
         $lineamientos19 = ValidacionLineamiento::where('indicador_id', 19)->get();
         $lineamientos21 = ValidacionLineamiento::where('indicador_id', 21)->get();
         $lineamientos22 = ValidacionLineamiento::where('indicador_id', 22)->get();
-        $escalas = EscalaCualitativo::all();
+        $escalas = Escala::all();
 
         return view('acreditacion_caces.personal_academico.index', [
             'evaluacion'=>$evaluacion,

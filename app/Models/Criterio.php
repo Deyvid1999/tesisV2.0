@@ -19,8 +19,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * 
+ * @property Collection|Indicador[] $indicadors
  * @property Collection|Subcriterio[] $subcriterios
- * @property Collection|User[] $users
  *
  * @package App\Models
  */
@@ -37,13 +37,13 @@ class Criterio extends Model
 		'porcentaje'
 	];
 
+	public function indicadors()
+	{
+		return $this->hasMany(Indicador::class, 'cri_id');
+	}
+
 	public function subcriterios()
 	{
 		return $this->hasMany(Subcriterio::class, 'cri_id');
-	}
-
-	public function users()
-	{
-		return $this->belongsToMany(User::class, 'user_has_criterios', 'cri_id', 'id');
 	}
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Criterio;
-use App\Models\EscalaCualitativo;
+use App\Models\Escala;
 use App\Models\Evaluacion;
 use App\Models\Subcriterio;
 use App\Models\Universidad;
@@ -19,7 +19,7 @@ class InvestigacionController extends Controller
         $sub_criterios = Subcriterio::where('criterio_id', 4)->get();
         $lineamientos25 = ValidacionLineamiento::where('indicador_id', 25)->get();
         $lineamientos26 = ValidacionLineamiento::where('indicador_id', 26)->get();
-        $escalas = EscalaCualitativo::all();       
+        $escalas = Escala::all();       
 
         return view('acreditacion_caces.investigacion.index', [
             'evaluacion' => $evaluacion,

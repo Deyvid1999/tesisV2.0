@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * Class UserHasUniversidad
  * 
  * @property int $uni_id
- * @property int $id
+ * @property int $use_id
  * 
  * @property Universidad $universidad
  * @property User $user
@@ -27,7 +27,7 @@ class UserHasUniversidad extends Model
 
 	protected $casts = [
 		'uni_id' => 'int',
-		'id' => 'int'
+		'use_id' => 'int'
 	];
 
 	public function universidad()
@@ -37,6 +37,6 @@ class UserHasUniversidad extends Model
 
 	public function user()
 	{
-		return $this->belongsTo(User::class, 'id');
+		return $this->belongsTo(User::class, 'use_id');
 	}
 }

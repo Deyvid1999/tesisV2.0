@@ -35,7 +35,6 @@ class Subcriterio extends Model
 	];
 
 	protected $fillable = [
-		'cri_id',
 		'subcriterio',
 		'porcentaje'
 	];

@@ -14,8 +14,11 @@ use Illuminate\Database\Eloquent\Model;
  * Class Indicador
  * 
  * @property int $id
- * @property int $sub_id
- * @property int $subcriterio_id
+ * @property int|null $sub_id
+ * @property int|null $sub_cri_id
+ * @property int|null $for_id
+ * @property int|null $ind_id
+ * @property int|null $cri_id
  * @property string|null $indicador
  * @property string|null $estandar
  * @property string|null $periodo
@@ -23,10 +26,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * 
- * @property Subcriterio $subcriterio
+ * @property Subcriterio|null $subcriterio
+ * @property Criterio|null $criterio
+ * @property Formula|null $formula
  * @property Collection|ElementoFundamental[] $elemento_fundamentals
  * @property Collection|Formula[] $formulas
- * @property Collection|User[] $users
+ * @property Collection|FuenteInformacion[] $fuente_informacions
  *
  * @package App\Models
  */
@@ -36,13 +41,19 @@ class Indicador extends Model
 
 	protected $casts = [
 		'sub_id' => 'int',
-		'subcriterio_id' => 'int',
+		'sub_cri_id' => 'int',
+		'for_id' => 'int',
+		'ind_id' => 'int',
+		'cri_id' => 'int',
 		'porcentaje' => 'float'
 	];
 
 	protected $fillable = [
 		'sub_id',
-		'subcriterio_id',
+		'sub_cri_id',
+		'for_id',
+		'ind_id',
+		'cri_id',
 		'indicador',
 		'estandar',
 		'periodo',
@@ -52,6 +63,16 @@ class Indicador extends Model
 	public function subcriterio()
 	{
 		return $this->belongsTo(Subcriterio::class, 'sub_id');
+	}
+
+	public function criterio()
+	{
+		return $this->belongsTo(Criterio::class, 'cri_id');
+	}
+
+	public function formula()
+	{
+		return $this->belongsTo(Formula::class, 'for_id');
 	}
 
 	public function elemento_fundamentals()
@@ -64,8 +85,8 @@ class Indicador extends Model
 		return $this->hasMany(Formula::class, 'ind_id');
 	}
 
-	public function users()
+	public function fuente_informacions()
 	{
-		return $this->belongsToMany(User::class, 'user_has_indicadors', 'ind_id', 'id');
+		return $this->hasMany(FuenteInformacion::class, 'ind_id');
 	}
 }

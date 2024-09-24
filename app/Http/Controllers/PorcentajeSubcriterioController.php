@@ -18,23 +18,38 @@ class PorcentajeSubcriterioController extends Controller
     {
         try {
             $datos = $request->except('_token');
-            foreach ($datos as $key => $item) {
-                // dd($item);
-                $item['id'] = $key;
-                // dd($item);
-                $id = Subcriterio::where('id', $key)->get()->first();
-                if ($id != null) {
-                    //update
-                    Subcriterio::where('id', $key)->update($item);
-                } else {
-                    //insert
-
-                    Subcriterio::insert($item);
+            $criterios = Criterio::all();
+            $bool = true;
+            $aux="";
+            foreach ($criterios as $criterio) {
+                $totalSubcriterio = 0;
+                $subcriterios = $criterio->subcriterios;
+                if (count($subcriterios) != 0) {
+                    foreach ($subcriterios as $subcriterio) {
+                        $totalSubcriterio += $datos[$subcriterio->id]['porcentaje'];
+                    }
+                    if (abs($totalSubcriterio - $criterio->porcentaje) <= 1) {
+                        foreach ($subcriterios as $subcriterio) {
+                            $prevporcentaje=$subcriterio->porcentaje;
+                            $subcriterio->update($datos[$subcriterio->id]);
+                            if($prevporcentaje!=$subcriterio->porcentaje){
+                                $subcriterio->indicadors()->update(['porcentaje'=>null]);
+                            }
+                        }
+                    } else {
+                        $bool = false;
+                        $aux=$aux.$criterio->criterio." ";
+                    }
                 }
             }
-            return redirect()->route('porcentaje.subcriterios.index')->with('success', 'Registro exitoso.');
+            if ($bool) {
+                return redirect()->route('porcentaje.subcriterios.index')->with('success', "Registro exitoso.");
+            }
+            else{
+                return redirect()->route('porcentaje.subcriterios.index')->with('error', "Revise los valores de $aux");
+            }
         } catch (\Exception $e) {
-            return redirect()->route('porcentaje.subcriterios.index')->with('error', 'Error al crear el registro');
+            return redirect()->route('porcentaje.subcriterios.index')->with('error', "Error al crear el registro.");
         }
     }
 }

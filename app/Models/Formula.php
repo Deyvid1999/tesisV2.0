@@ -14,14 +14,13 @@ use Illuminate\Database\Eloquent\Model;
  * Class Formula
  * 
  * @property int $id
- * @property int $res_id
  * @property int $ind_id
  * @property string|null $formula
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * 
  * @property Indicador $indicador
- * @property Resultado $resultado
+ * @property Collection|Indicador[] $indicadors
  * @property Collection|Resultado[] $resultados
  *
  * @package App\Models
@@ -31,13 +30,10 @@ class Formula extends Model
 	protected $table = 'formulas';
 
 	protected $casts = [
-		'res_id' => 'int',
 		'ind_id' => 'int'
 	];
 
 	protected $fillable = [
-		'res_id',
-		'ind_id',
 		'formula'
 	];
 
@@ -46,9 +42,9 @@ class Formula extends Model
 		return $this->belongsTo(Indicador::class, 'ind_id');
 	}
 
-	public function resultado()
+	public function indicadors()
 	{
-		return $this->belongsTo(Resultado::class, 'res_id');
+		return $this->hasMany(Indicador::class, 'for_id');
 	}
 
 	public function resultados()

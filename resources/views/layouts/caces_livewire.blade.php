@@ -41,9 +41,10 @@
     <!-- Template Main CSS File -->
     {{-- PARA PRODUCCION --}}
     <link href="{{ asset('public/plantilla/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/plantilla/css/fondo_home.css') }}" rel="stylesheet">
     {{-- PARA DESARROLLO --}}
     <link href="{{ asset('plantilla/css/style.css') }}" rel="stylesheet">
-    {{-- LIVIEWIRE --}}
+    <link href="{{ asset('plantilla/css/fondo_home.css') }}" rel="stylesheet">
     @livewireStyles
 </head>
 

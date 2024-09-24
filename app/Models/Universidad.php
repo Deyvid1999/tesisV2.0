@@ -38,8 +38,7 @@ class Universidad extends Model
 		'campus',
 		'sede',
 		'ciudad',
-		'informe',
-		'acciones'
+		'informe'
 	];
 
 	public function evaluacions()
@@ -49,6 +48,6 @@ class Universidad extends Model
 
 	public function users()
 	{
-		return $this->belongsToMany(User::class, 'user_has_universidads', 'uni_id', 'id');
+		return $this->belongsToMany(User::class, 'user_has_universidads', 'uni_id', 'use_id');
 	}
 }

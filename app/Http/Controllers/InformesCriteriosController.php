@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Criterio;
 use App\Models\Evaluacion;
 use App\Models\ResAcademico;
-use App\Models\ResCondicionInstitucion;
+use App\Models\Resultado;
 use App\Models\ResDocente;
 use App\Models\ResGestionCalidad;
 use App\Models\ResIndicador16;
@@ -56,7 +56,7 @@ class InformesCriteriosController extends Controller
     {
         $evaluacion = Evaluacion::find($id);
         $criterios = Criterio::all();
-        $res_condiciones_institucionales = ResCondicionInstitucion::where('evaluacion_id', $id)->where('universidad_id', $evaluacion->universidad->id)->get();
+        $res_condiciones_institucionales = Resultado::where('evaluacion_id', $id)->where('universidad_id', $evaluacion->universidad->id)->get();
         $total_criterio_1 = $this->calcularPorcentajeCriterio1($id);
         $total_criterio_2 = $this->calcularPorcentajeCriterio2($id);
         $total_criterio_5 = $this->calcularPorcentajeCriterio5($id);
@@ -75,7 +75,7 @@ class InformesCriteriosController extends Controller
     {
         $evaluacion = Evaluacion::find($id);
         $criterio_1 = Criterio::where('id', 1)->first();
-        $suma_elementos_criterio_1 = ResCondicionInstitucion::where('criterio_id', 1)->where('evaluacion_id', $id)->where('universidad_id', $evaluacion->universidad->id)->sum('porcentaje');
+        $suma_elementos_criterio_1 = Resultado::where('criterio_id', 1)->where('evaluacion_id', $id)->where('universidad_id', $evaluacion->universidad->id)->sum('porcentaje');
         $total = round(($suma_elementos_criterio_1 * 100) / ($criterio_1->porcentaje), 2);
         if ($total > 100) {
             $total = 100;

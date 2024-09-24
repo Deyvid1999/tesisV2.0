@@ -28,13 +28,13 @@
                             <i class="bi bi-exclamation-triangle me-1"></i>
                             No hay subcriterios registrados para este criterio.
                         </div>
-                        @if ($criterio->indicadores->isEmpty())
+                        @if ($criterio->indicadors->isEmpty())
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                 <i class="bi bi-exclamation-triangle me-1"></i>
-                                No hay indicadores registrados para este criterio.
+                                No hay indicadors registrados para este criterio.
                             </div>
                         @else
-                            @foreach ($criterio->indicadores as $indicador)
+                            @foreach ($criterio->indicadors as $indicador)
                                 <h6 class="text-crear">{{ $indicador->indicador }}</h6>
                                 <table class="table table-hover align-middle text-uppercase pt-2 pb-2">
                                     <thead class="table-pacifico">
@@ -93,9 +93,9 @@
                                             </tr>
                                         @endif
                                         @php
-                                            $totalElementos = count($indicador->elementosFundamentales);
+                                            $totalElementos = count($indicador->elemento_fundamentals);
                                         @endphp
-                                        @foreach ($indicador->elementosFundamentales as $elementoFundamental)
+                                        @foreach ($indicador->elemento_fundamentals as $elementoFundamental)
                                             <tr>
                                                 <td>{{ $loop->index + 1 }}</td>
                                                 <td>{{ $elementoFundamental->elemento }}</td>
@@ -199,7 +199,7 @@
                     @else
                         @foreach ($criterio->subcriterios as $subcriterio)
                             <h5>{{ $subcriterio->subcriterio }}</h5>
-                            @foreach ($subcriterio->indicadores as $indicador)
+                            @foreach ($subcriterio->indicadors as $indicador)
                                 <h6 class="text-crear">{{ $indicador->indicador }}</h6>
                                 <table class="table table-hover align-middle text-uppercase pt-2 pb-2">
                                     <thead class="table-pacifico">
@@ -521,9 +521,9 @@
                                             </tr>
                                         @endif
                                         @php
-                                            $totalElementos = count($indicador->elementosFundamentales);
+                                            $totalElementos = count($indicador->elemento_fundamentals);
                                         @endphp
-                                        @foreach ($indicador->elementosFundamentales as $elementoFundamental)
+                                        @foreach ($indicador->elemento_fundamentals as $elementoFundamental)
                                             <tr>
                                                 <td>{{ $loop->index + 1 }}</td>
                                                 <td>{{ $elementoFundamental->elemento }}</td>

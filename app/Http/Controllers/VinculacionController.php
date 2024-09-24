@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Criterio;
-use App\Models\EscalaCualitativo;
+use App\Models\Escala;
 use App\Models\Evaluacion;
 use App\Models\Indicador;
 use App\Models\ResIndicador29;
@@ -18,7 +18,7 @@ class VinculacionController extends Controller
         $evaluacion = Evaluacion::find($id);
         $indicadores = Indicador::all();
         $criterio = Criterio::find(5);
-        $escalas = EscalaCualitativo::all();
+        $escalas = Escala::all();
         return view('acreditacion_caces.vinculacion.index', [
             'evaluacion' => $evaluacion,
             'indicadores' => $indicadores,

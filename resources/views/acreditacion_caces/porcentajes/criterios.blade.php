@@ -31,7 +31,7 @@
                         @endif
                         @if ($message = Session::get('error'))
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <i class="bi bi-check-circle me-1"></i>
+                                <i class="bi bi-x-circle me-1"></i>
                                 {{ $message }}
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
                                     aria-label="Close"></button>
@@ -49,22 +49,20 @@
                     </thead>
                     <tbody>
                         @php
-                            $totalCriterios = count($criterios) - 1;
+                            $totalCriterios = count($criterios) ;
                         @endphp
 
                         @foreach ($criterios as $criterio)
-                            @if (!$loop->last)
-                                <tr>
-                                    <td>{{ $loop->index + 1 }}</td>
-                                    <td>{{ $criterio->criterio }}</td>
-                                    <td><input
-                                            class="form-control form-control-sm {{ empty($criterio->porcentaje) ? 'alert-danger' : '' }}"
-                                            type="number" min=0 max=100 step="0.001"
-                                            name="{{ $criterio->id }}[porcentaje]"
-                                            value="{{ isset($criterio->porcentaje) ? $criterio->porcentaje : round(100 / $totalCriterios, 3) }}">
-                                    </td>
-                                </tr>
-                            @endif
+                        <tr>
+                            <td>{{ $loop->index + 1 }}</td>
+                            <td>{{ $criterio->criterio }}</td>
+                            <td><input
+                                    class="form-control form-control-sm {{ empty($criterio->porcentaje) ? 'alert-danger' : '' }}"
+                                    type="number" min=0 max=100 step="0.001"
+                                    name="{{ $criterio->id }}[porcentaje]"
+                                    value="{{ isset($criterio->porcentaje) ? $criterio->porcentaje : round(100 / $totalCriterios, 3) }}">
+                            </td>
+                        </tr>
                         @endforeach
                     </tbody>
                 </table>

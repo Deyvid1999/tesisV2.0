@@ -2,7 +2,7 @@
     <div class="col-sm-9 mb-3">
         <label for="universidad" class="form-label">Universidad<samp class="text-eliminar">*</samp></label>
         <input type="text" class="form-control" name="universidad" id="universidad" required
-            onkeyup="this.value = this.value.toUpperCase();"
+        onkeyup="this.value = this.value.toUpperCase();"
             value="{{ isset($universidad->universidad) ? $universidad->universidad : old('universidad') }}">
     </div>
     <div class="col-sm-3 mb-3">

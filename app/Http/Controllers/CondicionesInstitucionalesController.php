@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Criterio;
-use App\Models\EscalaCualitativo;
+use App\Models\Escala;
 use App\Models\Evaluacion;
 use App\Models\Indicador;
-use App\Models\ResCondicionInstitucion;
+use App\Models\Resultado;
 use App\Models\Subcriterio;
 use App\Models\Universidad;
 use Illuminate\Http\Request;
@@ -18,7 +18,7 @@ class CondicionesInstitucionalesController extends Controller
         $evaluacion = Evaluacion::find($id);
         $criterio = Criterio::find(1);
         $sub_criterios = Subcriterio::where('criterio_id', 1)->get();
-        $escalas = EscalaCualitativo::all();
+        $escalas = Escala::all();
 
         return view('acreditacion_caces.condiciones_institucionales.index', compact('evaluacion', 'sub_criterios', 'criterio', 'escalas'));
     }
@@ -39,14 +39,14 @@ class CondicionesInstitucionalesController extends Controller
                 $item['criterio_id'] = $criterio_id;
                 $item['user_id'] = auth()->user()->id;
                 // dd($item);
-                $id = ResCondicionInstitucion::where('elemento_fundamental_id', $key)->get()->first();
+                $id = Resultado::where('elemento_fundamental_id', $key)->get()->first();
                 if ($id != null) {
                     //update
-                    ResCondicionInstitucion::where('elemento_fundamental_id', $key)->update($item);
+                    Resultado::where('elemento_fundamental_id', $key)->update($item);
                 } else {
                     //insert
 
-                    ResCondicionInstitucion::insert($item);
+                    Resultado::insert($item);
                 }
             }
             return redirect()->route('condiciones.institucionales.index', $evaluacion_id)->with('success', 'Registro exitoso.');

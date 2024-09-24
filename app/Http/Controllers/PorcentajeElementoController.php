@@ -18,23 +18,61 @@ class PorcentajeElementoController extends Controller
     {
         try {
             $datos = $request->except('_token');
-            foreach ($datos as $key => $item) {
-                // dd($item);
-                $item['id'] = $key;
-                // dd($item);
-                $id = ElementoFundamental::where('id', $key)->get()->first();
-                if ($id != null) {
-                    //update
-                    ElementoFundamental::where('id', $key)->update($item);
-                } else {
-                    //insert
-
-                    ElementoFundamental::insert($item);
+            $criterios = Criterio::all();
+            $bool = true;
+            $aux="";
+            foreach ($criterios as $criterio) {
+                $subcriterios = $criterio->subcriterios;
+                if (count($subcriterios) != 0) {
+                    foreach ($subcriterios as $subcriterio) {
+                        $indicadors=$subcriterio->indicadors;
+                        foreach ($indicadors as $indicador) {
+                            $elementos=$indicador->elemento_fundamentals;
+                            if(count($elementos)!=0){
+                                $totalElemento=0;
+                                foreach ($elementos as $elemento) {
+                                    $totalElemento += $datos[$elemento->id]['porcentaje'];
+                                }
+                                if (abs($totalElemento - $indicador->porcentaje) <= 1) {
+                                    foreach ($elementos as $elemento) {
+                                        $elemento->update($datos[$elemento->id]);
+                                    }
+                                } else {
+                                    $bool = false;
+                                    $aux=$aux.$indicador->indicador." ";
+                                }
+                            }
+                        }
+                    }
+                }else{
+                    $indicadors=$criterio->indicadors;
+                    foreach ($indicadors as $indicador) {
+                        $totalElemento=0;
+                        $elementos=$indicador->elemento_fundamentals;
+                        if(count($elementos)!=0){
+                            foreach ($elementos as $elemento) {
+                                $totalElemento += $datos[$elemento->id]['porcentaje'];
+                            }
+                            if (abs($totalElemento - $indicador->porcentaje) <= 1) {
+                                foreach ($elementos as $elemento) {
+                                    $elemento->update($datos[$elemento->id]);
+                                }
+                            } else {
+                                $bool = false;
+                                $aux=$aux.$indicador->indicador." ";
+                            }
+                        }
+                    }
                 }
             }
-            return redirect()->route('porcentaje.elementos.index')->with('success', 'Registro exitoso.');
+            if ($bool) {
+                return redirect()->route('porcentaje.elementos.index')->with('success', "Registro exitoso.");
+            }
+            else{
+                return redirect()->route('porcentaje.elementos.index')->with('error', "Revise los valores de $aux");
+            }
         } catch (\Exception $e) {
-            return redirect()->route('porcentaje.elementos.index')->with('error', 'Error al crear el registro');
+            return redirect()->route('porcentaje.elementos.index')->with('error', "Error al crear el registro$e");
         }
     }
 }

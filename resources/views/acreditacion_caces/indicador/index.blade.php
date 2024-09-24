@@ -81,17 +81,17 @@
                                 <p class="card-text text-uppercase"><strong>Ciudad:</strong>
                                     {{ $evaluacion->universidad->ciudad }}</p>
                                 <p class="card-text text-uppercase"><strong>Fecha de evaluacion:</strong>
-                                    {{ $evaluacion->universidad->fecha_evaluacion }}</p>
+                                    {{ $evaluacion->fecha_creacion }}</p>
                             </div>
                             <div class="col-md-6">
                                 <p class="card-text text-uppercase"><strong>Facultad:</strong>
-                                    {{ $evaluacion->universidad->facultad }}</p>
+                                    {{ $evaluacion->facultad }}</p>
                                 <p class="card-text text-uppercase"><strong>Departamento:</strong>
-                                    {{ $evaluacion->universidad->departamento }}</p>
+                                    {{ $evaluacion->departamento }}</p>
                                 <p class="card-text text-uppercase"><strong>Evaluador:</strong>
-                                    {{ $evaluacion->universidad->evaluadores }}</p>
+                                    {{ $evaluacion->user->name}}</p>
                                 <p class="card-text text-uppercase"><strong>Contraparte:</strong>
-                                    {{ $evaluacion->universidad->contraparte }}</p>
+                                    Unidad de Acreditación</p>
                             </div>
                         </div>
                     </div>

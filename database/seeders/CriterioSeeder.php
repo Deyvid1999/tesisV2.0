@@ -22,7 +22,7 @@ class CriterioSeeder extends Seeder
             ['criterio' => 'INVESTIGACIÓN E INNOVACIÓN'],
             ['criterio' => 'VINCULACIÓN CON LA SOCIEDAD'],
             ['criterio' => 'SISTEMA DE GESTIÓN DE LA CALIDAD'],
-            ['id' => '200','criterio' => ''],
+
         ];
 
         foreach ($criterios as $criterio) {

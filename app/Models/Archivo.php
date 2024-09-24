@@ -14,13 +14,12 @@ use Illuminate\Database\Eloquent\Model;
  * Class Archivo
  * 
  * @property int $id
- * @property int $fuente_informacion_id
  * @property string|null $archivo
  * @property string|null $observacion
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * 
- * @property Collection|FuenteInformacion[] $fuente_informacions
+ * @property Collection|ArcFueEva[] $arc_fue_evas
  *
  * @package App\Models
  */
@@ -28,18 +27,13 @@ class Archivo extends Model
 {
 	protected $table = 'archivos';
 
-	protected $casts = [
-		'fuente_informacion_id' => 'int'
-	];
-
 	protected $fillable = [
-		'fuente_informacion_id',
 		'archivo',
 		'observacion'
 	];
 
-	public function fuente_informacions()
+	public function arc_fue_evas()
 	{
-		return $this->hasMany(FuenteInformacion::class, 'arc_id');
+		return $this->hasMany(ArcFueEva::class, 'arc_id');
 	}
 }

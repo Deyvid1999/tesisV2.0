@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Criterio;
-use App\Models\EscalaCualitativo;
+use App\Models\Escala;
 use App\Models\Evaluacion;
 use App\Models\Indicador;
 use App\Models\ResGestionCalidad;
@@ -17,7 +17,7 @@ class GestionCalidadController extends Controller
         $evaluacion = Evaluacion::find($id);
         $criterio = Criterio::find(6);
         $indicadores = Indicador::where('criterio_id', 6)->get();
-        $escalas = EscalaCualitativo::all();
+        $escalas = Escala::all();
         return view('acreditacion_caces.gestion_calidad.index', compact('evaluacion', 'indicadores','criterio','escalas'));
     }
 

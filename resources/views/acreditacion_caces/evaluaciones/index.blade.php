@@ -67,7 +67,7 @@
                                     {{ \Carbon\Carbon::parse($evaluacion->fecha_inicial)->format('d-m-Y') }} - {{ \Carbon\Carbon::parse($evaluacion->fecha_final)->format('d-m-Y') }}
                                 </td>
                                 <td>
-                                    {{ $evaluacion->administrador }}
+                                    {{ $evaluacion->user->name }}
                                 </td>
                                 <td>
                                     {{ $evaluacion->departamento }}

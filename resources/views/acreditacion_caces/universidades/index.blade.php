@@ -48,7 +48,6 @@
                     <thead class="table-pacifico">
                         <tr>
                             <th scope="col">No</th>
-                            <th scope="col">FOTO</th>
                             <th scope="col">UNIVERSIDAD</th>
                             <th scope="col">CAMPUS</th>
                             <th scope="col">SEDE</th>
@@ -63,9 +62,6 @@
                             <tr>
                                 <td>
                                     {{ $loop->iteration }}
-                                </td>
-                                <td>
-                                    {{ $universidad->foto }}
                                 </td>
                                 <td>
                                     {{ $universidad->universidad }}

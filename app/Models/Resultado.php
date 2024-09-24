@@ -7,31 +7,30 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Resultado
  * 
  * @property int $id
- * @property int $for_id
+ * @property int $eva_uni_id
+ * @property int $eva_use_id
  * @property int $eva_id
- * @property int $fue_id
- * @property int $evaluacion_id
- * @property int $elemento_fundamental_id
- * @property float|null $porcentaje
- * @property string|null $valoracion
+ * @property int|null $ele_id
+ * @property int|null $ele_ind_id
+ * @property int|null $for_id
+ * @property int|null $for_ind_id
+ * @property int|null $esc_id
+ * @property float|null $resultado
  * @property string|null $observacion
  * @property int|null $estatus
- * @property int|null $formula
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * 
- * @property FuenteInformacion $fuente_informacion
+ * @property ElementoFundamental|null $elemento_fundamental
+ * @property Formula|null $formula
+ * @property Escala|null $escala
  * @property Evaluacion $evaluacion
- * @property Collection|Evaluacion[] $evaluacions
- * @property Collection|Formula[] $formulas
- * @property Collection|FuenteInformacion[] $fuente_informacions
  *
  * @package App\Models
  */
@@ -40,37 +39,32 @@ class Resultado extends Model
 	protected $table = 'resultados';
 
 	protected $casts = [
-		'for_id' => 'int',
+		'eva_uni_id' => 'int',
+		'eva_use_id' => 'int',
 		'eva_id' => 'int',
-		'fue_id' => 'int',
-		'evaluacion_id' => 'int',
-		'elemento_fundamental_id' => 'int',
-		'porcentaje' => 'float',
-		'estatus' => 'int',
-		'formula' => 'int'
+		'ele_id' => 'int',
+		'ele_ind_id' => 'int',
+		'for_id' => 'int',
+		'for_ind_id' => 'int',
+		'esc_id' => 'int',
+		'resultado' => 'float',
+		'estatus' => 'int'
 	];
 
 	protected $fillable = [
+		'ele_id',
+		'ele_ind_id',
 		'for_id',
-		'eva_id',
-		'fue_id',
-		'evaluacion_id',
-		'elemento_fundamental_id',
-		'porcentaje',
-		'valoracion',
+		'for_ind_id',
+		'esc_id',
+		'resultado',
 		'observacion',
-		'estatus',
-		'formula'
+		'estatus'
 	];
 
-	public function fuente_informacion()
+	public function elemento_fundamental()
 	{
-		return $this->belongsTo(FuenteInformacion::class, 'fue_id');
-	}
-
-	public function evaluacion()
-	{
-		return $this->belongsTo(Evaluacion::class, 'eva_id');
+		return $this->belongsTo(ElementoFundamental::class, 'ele_id');
 	}
 
 	public function formula()
@@ -78,18 +72,13 @@ class Resultado extends Model
 		return $this->belongsTo(Formula::class, 'for_id');
 	}
 
-	public function evaluacions()
+	public function escala()
 	{
-		return $this->hasMany(Evaluacion::class, 'res_id');
+		return $this->belongsTo(Escala::class, 'esc_id');
 	}
 
-	public function formulas()
+	public function evaluacion()
 	{
-		return $this->hasMany(Formula::class, 'res_id');
-	}
-
-	public function fuente_informacions()
-	{
-		return $this->hasMany(FuenteInformacion::class, 'res_id');
+		return $this->belongsTo(Evaluacion::class, 'eva_id');
 	}
 }

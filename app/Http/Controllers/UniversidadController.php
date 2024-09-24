@@ -24,14 +24,14 @@ class UniversidadController extends Controller
 
         $universidad = $request->except('_token');
         
-        $uni = $request->universidad;
+        $uni = $request->id;
 
         if ($request->hasFile('foto')) {
-            $universidad['foto'] = $request->file('foto')->storeAs('uploads/universidades/' . $uni, 'foto.jpg', 'public');
+            $universidad['foto'] = $request->file('foto')->storeAs('uploads/' . $uni , 'foto.jpg', 'public');
         }
 
         if ($request->hasFile('informe')) {
-            $universidad['informe'] = $request->file('informe')->storeAs('uploads/universidades/' . $uni, 'informe.pdf', 'public');
+            $universidad['informe'] = $request->file('informe')->storeAs('uploads/' . $uni, 'informe.pdf', 'public');
         }
 
         Universidad::insert($universidad);
@@ -52,11 +52,11 @@ class UniversidadController extends Controller
         $uni = $request->universidad;
 
         if ($request->hasFile('foto')) {
-            $universidad['foto'] = $request->file('foto')->storeAs('uploads/universidades/' . $uni, 'foto.jpg', 'public');
+            $universidad['foto'] = $request->file('foto')->storeAs('uploads/' . $id, 'foto.jpg', 'public');
         }
 
         if ($request->hasFile('informe')) {
-            $universidad['informe'] = $request->file('informe')->storeAs('uploads/universidades/' . $uni, 'informe.pdf', 'public');
+            $universidad['informe'] = $request->file('informe')->storeAs('uploads/' . $id, 'informe.pdf', 'public');
         }
 
         Universidad::where('id', $id)->update($universidad);
