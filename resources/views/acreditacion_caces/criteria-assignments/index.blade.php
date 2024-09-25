@@ -36,11 +36,8 @@
                             {{ $criterio->criterio }}
                         </td>
                         <td>
-                            @if(!$criterio->users->isEmpty())
-                            {{$criterio->users->first()->name}}
-                            @else
-                            <label for="">No Asignado</label>
-                            @endif
+                        <label>No Asignado</label>
+
                         </td>
                         <td>
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal"

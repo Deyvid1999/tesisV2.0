@@ -104,16 +104,16 @@ Route::middleware(['auth'])->group(function () {
     
     Route::post('register', [RegisterController::class,'create'])->name('create_user');
     
-    Route::resource('criteria-assignments', CriteriaAssignmentsController::class)->names('criteria.assignments')->except('show');
-    
+    Route::get('criteria-assignments/{id}', [CriteriaAssignmentsController::class, 'index'])->name('criteria.assignments.index');
+
     Route::resource('criteria-assignments', CriteriaAssignmentsController::class)->names('criteria.assignments');
-
-
+    
+    
+    //////////////////////////////////////////////////LIVEWIRE//////////////////////////////////////////////
+    Route::middleware('auth')->get('{eva_id}/criterio/{cri_id}', [CriterioController::class, 'criterio'])->name('criterio');
 });
 
 
 
-//////////////////////////////////////////////////LIVEWIRE//////////////////////////////////////////////
-Route::middleware('auth')->get('{eva_id}/criterio/{cri_id}', [CriterioController::class, 'criterio'])->name('criterio');
 
 
