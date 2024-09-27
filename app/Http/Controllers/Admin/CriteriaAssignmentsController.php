@@ -13,8 +13,12 @@ use Illuminate\Http\Request;
 
 class CriteriaAssignmentsController extends Controller
 {
-    public function index($id)
+    public function index()
     {
+        
+    }  
+
+    public function show($id){
         $aux=[];
         $criterios=Criterio::all();
         $users= User::all();
@@ -25,7 +29,7 @@ class CriteriaAssignmentsController extends Controller
         }
         echo("<script>console.log('PHP: " . $evaluacion . "');</script>");
         return view('acreditacion_caces.criteria-assignments.index',compact('criterios','users','evaluacion'));
-    }  
+    }
     
     public function store(Request $request){
         $userId=$request->user_id;
@@ -35,8 +39,16 @@ class CriteriaAssignmentsController extends Controller
 
         $user=User::find($userId);        
         $user->assignRole('CriteriaR');
-        Permission::create(['name'=> "$evaluacionId/$criterioId","guard_name"=> 'web']);
-        $user->givePermissionTo("$evaluacionId/$criterioId");
+        $permissionName="$evaluacionId/$criterioId";
+        try {
+            Permission::create(['name'=> $permissionName,"guard_name"=> 'web']);
+            app()['cache']->forget('spatie.permission.cache');
+            $user->givePermissionTo($permissionName);
+        } catch (\Throwable $th) {
+            $oldUser=User::permission($permissionName)->get()->first();
+            $oldUser->revokePermissionTo($permissionName);
+            $user->givePermissionTo($permissionName);
+        }
 
         $criterios=Criterio::all();
         $users= User::all();

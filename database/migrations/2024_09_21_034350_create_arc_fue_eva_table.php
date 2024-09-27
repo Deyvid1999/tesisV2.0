@@ -26,7 +26,8 @@ class CreateArcFueEvaTable extends Migration
             $table->index(['eva_id', 'uni_id', 'use_id'], 'FK_Reference_18');
             $table->foreign('arc_id', 'FK_Reference_16')->references('id')->on('archivos')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign(['fue_id', 'fue_ind_id'], 'FK_Reference_17')->references(['id', 'ind_id'])->on('fuente_informacions')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign(['eva_id', 'uni_id', 'use_id'], 'FK_Reference_18')->references(['id', 'uni_id', 'use_id'])->on('evaluacions')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign(['eva_id', 'uni_id'], 'FK_Reference_18')->references(['id', 'uni_id'])->on('evaluacions')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign(['use_id'], 'FK_Reference_30')->references(['id'])->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

@@ -23,7 +23,7 @@
     </a>
 </li> -->
 <li class="nav-item">
-    <a class="nav-link collapsed" id="criteria-assignments" href="{{ route('criteria.assignments.index',$evaluacion->id) }}">
+    <a class="nav-link collapsed" id="criteria-assignments" href="{{ route('criteria.assignments.show',1)}}">
         <i class="bi bi-file-text"></i><span>Asignar Criterios</span>
     </a>
 </li>

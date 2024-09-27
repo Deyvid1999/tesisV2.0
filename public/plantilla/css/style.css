@@ -30,19 +30,19 @@ a:hover {
 
 /* //COLORES PARA LOS MODALES */
 .bg-crear {
-  background-color: #c84239 !important;
+  background-color: #00713d !important;
 }
 
 .bg-actualizar {
-  background-color: #00c851 !important;
+  background-color: #00713d !important;
 }
 
 .bg-ver {
-  background-color: #33b5e5 !important;
+  background-color: #00713d !important;
 }
 
 .bg-eliminar {
-  background-color: #ff3547 !important;
+  background-color: #c84239 !important;
 }
 
 .bg-pacifico {
@@ -69,7 +69,7 @@ a:hover {
 }
 
 .text-eliminar {
-  color: #ff3547 !important;
+  color: #c84239 !important;
 }
 
 .text-pacifico {
@@ -98,22 +98,22 @@ a:hover {
 }
 
 .btn-actualizar {
-  background-color: #00c851;
+  background-color: #00713b;
   color: #fff;
 }
 
 .btn-actualizar:hover {
-  background-color: #009444;
+  background-color: #00713b;
   color: #fff;
 }
 
 .btn-outline-actualizar {
-  border-color: #00c851;
-  color: #00c851;
+  border-color: #00713b;
+  color: #00713b;
 }
 
 .btn-outline-actualizar:hover {
-  background-color: #00c851;
+  background-color: #00713b;
   color: #fff;
 }
 
@@ -138,7 +138,7 @@ a:hover {
 }
 
 .btn-eliminar {
-  background-color: #ff3547;
+  background-color: #c84239;
   color: #fff;
 }
 
@@ -148,12 +148,12 @@ a:hover {
 }
 
 .btn-outline-eliminar {
-  border-color: #ff3547;
-  color: #ff3547;
+  border-color: #c84239;
+  color: #c84239;
 }
 
 .btn-outline-eliminar:hover {
-  background-color: #ff3547;
+  background-color: #c84239;
   color: #fff;
 }
 

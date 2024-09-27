@@ -25,9 +25,12 @@ class FuenteLayout extends Component
         $this->uni_id = $this->evaluacion->universidad->id;
         $this->ind_id = $id_indicador;
         $this->indicador = Indicador::find($this->ind_id);
-        $this->sub_id = $this->indicador->subcriterio->id;
-        $this->cri_id = $this->indicador->subcriterio->criterio->id;
-
+        try {
+            $this->sub_id = $this->indicador->sub_id;
+            $this->cri_id = $this->indicador->subcriterio->criterio->id;
+        } catch (\Throwable $th) {
+            $this->cri_id= $this->indicador->criterio->id;
+        }
         $this->fuentesInformaciones = FuenteInformacion::where('ind_id', $this->ind_id)->get();
         // foreach ($this->fuentesInformaciones as $fuente) {
         //     $arch_condicion_institucion = Archivo::where('eva_id', $this->eva_id)->where('ind_id', $this->ind_id)->first();

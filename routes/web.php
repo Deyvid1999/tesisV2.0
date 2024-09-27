@@ -45,12 +45,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::middleware(['role:Admin'])->group(function () {
-        // PARA CREAR UNIVERSIDADES
-        Route::get('universidades/create', [UniversidadController::class, 'create'])->name('universidades.create');
-    });
-
-    Route::resource('universidades', UniversidadController::class)->except(['create'])->names('universidades');
+    Route::resource('universidades', UniversidadController::class)->names('universidades');
 
 
         // CONFIGURACION DE PORCENTAJES
@@ -104,13 +99,10 @@ Route::middleware(['auth'])->group(function () {
     
     Route::post('register', [RegisterController::class,'create'])->name('create_user');
     
-    Route::get('criteria-assignments/{id}', [CriteriaAssignmentsController::class, 'index'])->name('criteria.assignments.index');
-
     Route::resource('criteria-assignments', CriteriaAssignmentsController::class)->names('criteria.assignments');
-    
-    
+
     //////////////////////////////////////////////////LIVEWIRE//////////////////////////////////////////////
-    Route::middleware('auth')->get('{eva_id}/criterio/{cri_id}', [CriterioController::class, 'criterio'])->name('criterio');
+    Route::get('{eva_id}/criterio/{cri_id}', [CriterioController::class, 'criterio'])->name('criterio');
 });
 
 

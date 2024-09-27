@@ -43,6 +43,11 @@ class ArcFueEva extends Model
 		'fue_ind_id'
 	];
 
+	public function user()
+	{
+		return $this->belongsTo(User::class, 'use_id');
+	}
+
 	public function archivo()
 	{
 		return $this->belongsTo(Archivo::class, 'arc_id');

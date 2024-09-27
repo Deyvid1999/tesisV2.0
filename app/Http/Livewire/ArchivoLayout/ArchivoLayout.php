@@ -8,6 +8,7 @@ use App\Models\Evaluacion;
 use App\Models\Indicador;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Throwable;
 
 class ArchivoLayout extends Component
 {
@@ -42,8 +43,12 @@ class ArchivoLayout extends Component
         $this->nombre_indicador = trim($parts_nombre_inidcador[1]);
         // FIN        
         $this->criterio_id = $this->indicador->cri_id;
-        $this->nombre_criterio = $this->indicador->subcriterio->criterio->criterio;
-        $this->subcriterio_id = $this->indicador->subcriterio->id;
+        try {
+            $this->nombre_criterio = $this->indicador->subcriterio->criterio->criterio;
+            $this->subcriterio_id = $this->indicador->subcriterio->id;
+        } catch (\Throwable $th) {
+            $this->nombre_criterio = $this->indicador->criterio->criterio;
+        }
         $this->fue_id = $id_fuente;
     }
 
@@ -68,28 +73,41 @@ class ArchivoLayout extends Component
     }
 
     public function asignarArc($arc_id){
-        ArcFueEva::create(['arc_id'=>$arc_id, 'fue_id'=>$this->fue_id, 'uni_id'=>$this->uni_id,'eva_id'=>$this->eva_id]);
+        try {
+            $userId = auth()->id();
+            ArcFueEva::insert(['arc_id'=>$arc_id, 'fue_id'=>$this->fue_id, 'uni_id'=>$this->uni_id,'eva_id'=>$this->eva_id,'use_id'=>$userId]);
+            $this->dispatchBrowserEvent('close-modal',["assign",$this->fue_id]);
+            session()->flash('success', 'Registro agregado con éxito'); 
+        } catch (\Throwable $th) {
+            $this->dispatchBrowserEvent('close-modal',['form_name'=>"assign",'fue_id'=>$this->fue_id]);
+            session()->flash('error', 'El archivo seleccioniado ya esta asignado a la fuente de información actual'); 
+        }
     }
 
     // FUNCION PARA GUARDAR DATOS
     public function store()
     {
-        $this->validate();
-        $rutaArchivos = 'docs/' . $this->evaluacion->uni_id;
-        $nombre_archivo_1 = $this->archivo->getClientOriginalName();
-        if ($this->archivo != null) {
-            $nombre_archivo = $this->archivo->storeAs($rutaArchivos, $nombre_archivo_1, 'public');
-        } else {
-            $nombre_archivo = $this->archivo;
+        try{
+            $this->validate();
+            $rutaArchivos = 'docs/' . $this->evaluacion->uni_id;
+            $nombre_archivo_1 = $this->archivo->getClientOriginalName();
+            if ($this->archivo != null) {
+                $nombre_archivo = $this->archivo->storeAs($rutaArchivos, $nombre_archivo_1, 'public');
+            } else {
+                $nombre_archivo = $this->archivo;
+            }
+            Archivo::create([
+                'archivo' => $nombre_archivo,
+                'observacion' => $this->observacion,
+            ]);
+    
+            $this->cancel();
+            $this->dispatchBrowserEvent('close-modal');
+            session()->flash('success', 'Registro agregado con éxito');
         }
-        Archivo::create([
-            'archivo' => $nombre_archivo,
-            'observacion' => $this->observacion,
-        ]);
-
-        $this->resetInput();
-        $this->dispatchBrowserEvent('close-modal');
-        session()->flash('success', 'Registro agregado con éxito');
+        catch(\Throwable $th){
+            session()->flash('error', 'Verifique los datos');
+        }
     }
 
     // FUNCION PARA ACTUALIZAR LOS DATOS DEL ESTUDIANTE
@@ -133,8 +151,8 @@ class ArchivoLayout extends Component
 
     public function delete()
     {
-        Archivo::find($this->delete_id)->delete();
+        ArcFueEva::where('arc_id',$this->delete_id)->where( 'fue_id',$this->fue_id)->where('uni_id',$this->uni_id)->where('eva_id',$this->eva_id)->delete();
         $this->dispatchBrowserEvent('close-modal');
-        session()->flash('message', 'Registro eliminado con éxito.');
+        session()->flash('delete-successfull', 'Registro desasignado con éxito.');
     }
 }
