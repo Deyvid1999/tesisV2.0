@@ -36,7 +36,7 @@
                             {{ $criterio->criterio }}
                         </td>
                         <td>
-                        <label>No Asignado</label>
+                        <label>{{$criterio->responsable}}</label>
 
                         </td>
                         <td>

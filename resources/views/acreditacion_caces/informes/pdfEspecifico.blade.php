@@ -42,9 +42,9 @@
     <h2>Universidad: {{ $evaluacion->universidad->universidad }}</h2>
     <h2>Fecha de Evaluación: {{ $evaluacion->fecha_creacion }}</h2>
     @php
-        $totalCriterios = count($criterios) - 1;
+        $totalCriterios = count($indicadors) - 1;
     @endphp
-    @foreach ($criterios as $criterio)
+    @foreach ($indicadors as $criterio)
         @if (!$loop->last)
             <div class="card">
                 <h3 class="fw-normal text-pacifico text-uppercase">CRITERIO {{ $loop->index + 1 }}:

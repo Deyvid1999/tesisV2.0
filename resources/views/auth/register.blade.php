@@ -1,6 +1,6 @@
 @extends('layouts.caces')
 @section('sidebar')
-    @include('layouts.sidebar')
+@include('layouts.sidebar_inicio')
 @endsection
 @section('content')
 <div class="pagetitle">
@@ -13,7 +13,7 @@
 </div>
 <div class="card">
     <div class="card-header pb-2">
-        <h6 class="fw-normal text-pacifico text-uppercase">Registrar Usuario</h6>
+        <h6 class="fw-normal text-pacifico text-uppercase">Llene los campos</h6>
     </div>
     <div class="card-body mt-3">
         <div class="row p-2">
@@ -86,6 +86,8 @@
                         </div>
                     </div>
                 </div>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                    data-bs-target="#uni_register" data-indicador-id="">ASIGNAR</button>
 
                 <div class="form-group mt-3">
                     <button type="submit" class="btn btn-success">Registrarse</button>
@@ -94,4 +96,18 @@
         </div>
     </div>
 </div>
+@endsection
+
+@include('auth.modal')
+@section('scripts')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    $('#uni_register').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget);
+        // var indicadorId = button.data('indicador-id');
+
+        // var modal = $(this);
+        // modal.find('#indicadorId').val(indicadorId);
+    });
+</script>
 @endsection

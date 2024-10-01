@@ -17,14 +17,14 @@
 </li>
 @can('admin')
 <li class="nav-heading">Configuracion</li>
-<!-- <li class="nav-item">
-    <a class="nav-link collapsed" id="register" href="{{ route('register',$evaluacion->id) }}">
-        <i class="bi bi-people"></i><span>Registrar usuario</span>
-    </a>
-</li> -->
 <li class="nav-item">
-    <a class="nav-link collapsed" id="criteria-assignments" href="{{ route('criteria.assignments.show',1)}}">
+    <a class="nav-link collapsed" id="criteria-assignments" href="{{ route('criteria.assignments.show',$evaluacion->id)}}">
         <i class="bi bi-file-text"></i><span>Asignar Criterios</span>
+    </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link collapsed" id="indicador-assignments" href="{{ route('indicador.assignments.show',$evaluacion->id)}}">
+        <i class="bi bi-file-text"></i><span>Asignar Indicadores</span>
     </a>
 </li>
 <li>

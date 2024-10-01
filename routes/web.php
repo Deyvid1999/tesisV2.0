@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController; 
 use App\Http\Controllers\Admin\CriteriaAssignmentsController;
+use App\Http\Controllers\Admin\IndicadorAssignmentsController;
 use App\Http\Controllers\Admin\UserHasCriterioController;
 use App\Models\UserHasCriterio;
 use Spatie\Permission\Models\Role;
@@ -67,17 +68,6 @@ Route::middleware(['auth'])->group(function () {
     
     // INDICADORES
     Route::get('indicadores/{id}', [IndicadorController::class, 'index'])->name('indicadores.index');
-    // CRITERIOS
-    // Route::get('condiciones-institucionales/{id}', [CondicionesInstitucionalesController::class, 'index'])->name('condiciones.institucionales.index');
-    // Route::post('condiciones-institucionales', [CondicionesInstitucionalesController::class, 'store'])->name('condiciones.institucionales.store');
-    // Route::get('docencia/{id}', [DocenciaController::class, 'index'])->name('docencia.index');
-    // Route::post('docencia', [DocenciaController::class, 'store'])->name('docencia.store');
-    // Route::get('personal-academico/{id}', [PersonalAcademicoController::class, 'index'])->name('personal.academico.index');
-    // Route::get('investigacion/{id}', [InvestigacionController::class, 'index'])->name('investigacion.index');
-    // Route::get('vinculacion/{id}', [VinculacionController::class, 'index'])->name('vinculacion.index');
-    // Route::post('vinculacion', [VinculacionController::class, 'store'])->name('vinculacion.store');
-    // Route::get('gestion-calidad/{id}', [GestionCalidadController::class, 'index'])->name('gestion.calidad.index');
-    // Route::post('gestion-calidad', [GestionCalidadController::class, 'store'])->name('gestion.calidad.store');
     
     //INFORMES
     Route::get('informes-criterios/{id}', [InformesCriteriosController::class, 'index'])->name('informes.criterios.index');
@@ -95,12 +85,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('personal-academico/excel/{id}', [PersonalAcademicoController::class, 'personalAcademicoExcel'])->name('personal.academico.excel');
     Route::get('informes/informe-general/{id}', [InformesCriteriosController::class, 'informeGeneralPdf'])->name('personal.academico.informeGeneral');
     Route::get('informes/informe-especifico/{id}', [InformesCriteriosController::class, 'informeEspecificoPdf'])->name('personal.academico.informeEspecifico');
-    
-    
-    Route::post('register', [RegisterController::class,'create'])->name('create_user');
+
+    Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
     
     Route::resource('criteria-assignments', CriteriaAssignmentsController::class)->names('criteria.assignments');
-
+    Route::resource('indicador-assignments', IndicadorAssignmentsController::class)->names('indicador.assignments');
+    
     //////////////////////////////////////////////////LIVEWIRE//////////////////////////////////////////////
     Route::get('{eva_id}/criterio/{cri_id}', [CriterioController::class, 'criterio'])->name('criterio');
 });

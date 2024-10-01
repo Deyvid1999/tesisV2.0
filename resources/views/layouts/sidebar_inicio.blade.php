@@ -15,3 +15,8 @@
         <i class="bi bi-grid"></i><span>Universidades</span>
     </a>
 </li>
+<li class="nav-item">
+    <a class="nav-link collapsed" id="new_user" href="{{ route('register') }}">
+        <i class="bi bi-person"></i><span>Registrar usuarios</span>
+    </a>
+</li>

@@ -33,7 +33,7 @@
                 @endif
             </div>
         </div>
-        @foreach ($criterios as $criterio)
+        @foreach ($indicadors as $criterio)
         <div class="card">
             <div class="card-header pb-2">
                 <h6 class="fw-normal text-pacifico text-uppercase">{{ $criterio->criterio }} <span
