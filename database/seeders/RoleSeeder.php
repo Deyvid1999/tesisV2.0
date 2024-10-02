@@ -23,7 +23,7 @@ class RoleSeeder extends Seeder
         $criteriaRPermission=Permission::create(['name'=> 'criteria.r.permission']);
 
         $criterio1Permission=Permission::create(['name'=> 'criterio_1']);
-        $criterio2Permission=Permission::create(['name'=> 'criterio_32']);
+        $criterio2Permission=Permission::create(['name'=> 'criterio_2']);
         $criterio3Permission=Permission::create(['name'=> 'criterio_3']);
         $criterio4Permission=Permission::create(['name'=> 'criterio_4']);
         $criterio5Permission=Permission::create(['name'=> 'criterio_5']);

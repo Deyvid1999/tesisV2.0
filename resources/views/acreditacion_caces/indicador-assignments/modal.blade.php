@@ -1,3 +1,4 @@
+@can("criterio_$criterio->id")
 <div class="modal fade" id="users" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -24,3 +25,4 @@
         </div>
     </div>
 </div>
+@endcan

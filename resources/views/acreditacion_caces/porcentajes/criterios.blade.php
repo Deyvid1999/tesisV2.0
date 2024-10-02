@@ -49,10 +49,10 @@
                     </thead>
                     <tbody>
                         @php
-                            $totalCriterios = count($indicadors) ;
+                            $totalCriterios = count($criterios) ;
                         @endphp
 
-                        @foreach ($indicadors as $criterio)
+                        @foreach ($criterios as $criterio)
                         <tr>
                             <td>{{ $loop->index + 1 }}</td>
                             <td>{{ $criterio->criterio }}</td>

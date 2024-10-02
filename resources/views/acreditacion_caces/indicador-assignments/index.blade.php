@@ -98,7 +98,6 @@
     </div>
 </div>
 @endif
-
 @endforeach
 @include('acreditacion_caces.indicador-assignments.modal')
 @endsection
