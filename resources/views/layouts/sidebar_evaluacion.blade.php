@@ -8,7 +8,7 @@
 </li>
 <li class="nav-heading">EVALUACIONES</li>
 <li class="nav-item">
-    <a class="nav-link collapsed" id="evaluaciones" href="{{ route('evaluaciones.index', $universidad->id) }}">
+    <a class="nav-link collapsed" id="evaluaciones" href="{{ route('evaluaciones.show', $universidad->id) }}">
         <i class="fas fa-poll"></i><span style="padding-left: 10px;">Evaluaciones</span>
     </a>
 </li>

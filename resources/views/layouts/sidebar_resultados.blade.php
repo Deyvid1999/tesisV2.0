@@ -1,5 +1,5 @@
 <li class="nav-item">
-    <a class="nav-link collapsed" id="inicio" href="{{ route('evaluaciones.index', $evaluacion->universidad->id) }}">
+    <a class="nav-link collapsed" id="inicio" href="{{ route('indicadores.index', $evaluacion->id) }}">
         <i class="bi bi-arrow-return-left"></i><span>Regresar</span>
     </a>
 </li>
@@ -17,50 +17,19 @@
 </li>
 <!-- ======= Sidebar ======= -->
 <li class="nav-heading">Resultados</li>
-@can('criterio_1')
-    <li class="nav-item">
-        <a class="nav-link collapsed" id="condiciones_institucionales"
-            href="{{ route('condiciones.institucionales.resultado', $evaluacion->id) }}">
-            <i class="bi bi-building"></i><span>Condiciones Institucionales</span>
-        </a>
-    </li>
-@endcan
-@can('criterio_2')
-    <li class="nav-item">
-        <a class="nav-link collapsed" id="docencia" href="{{ route('docencia.resultado', $evaluacion->id) }}">
-            <i class="bi bi-book"></i><span>Docencia</span>
-        </a>
-    </li>
-@endcan
-@can('criterio_3')
-    <li class="nav-item">
-        <a class="nav-link collapsed" id="personal_academico"
-            href="{{ route('personal.academico.resultado', $evaluacion->id) }}">
-            <i class="bi bi-people"></i><span>Condiciones del Personal Académico, Apoyo Académico y Estudiantes</span>
-        </a>
-    </li>
-@endcan
-@can('criterio_4')
-    <li class="nav-item">    
-            <a class="nav-link collapsed" id="investigacion" href="{{ route('investigacion.resultado', $evaluacion->id) }}">
-            <i class="bi bi-lightbulb"></i><span>Investigación e Innovación</span>
-        </a>
-    </li>
-@endcan
-@can('criterio_5')
-    <li class="nav-item">
-        <a class="nav-link collapsed" id="vinculacion" href="{{ route('vinculacion.resultado', $evaluacion->id) }}">
-            <i class="bi bi-link"></i><span>Vinculación con la Sociedad</span>
-        </a>
-    </li>
-@endcan
-@can('criterio_6')
-    <li class="nav-item">
-        <a class="nav-link collapsed" id="gestion_calidad" href="{{ route('gestion.calidad.resultado', $evaluacion->id) }}">
-            <i class="bi bi-trophy"></i><span>Sistema de Gestión de la Calidad</span>
-        </a>
-    </li>
-@endcan
+@php
+$icons=['building','book','people','lightbulb','link','trophy'];
+@endphp
+@foreach ($criterios as $criterio )
+@if (auth()->user()->can("admin")||auth()->user()->can("$evaluacion->id/$criterio->id"))
+<li class="nav-item">
+    <a class="nav-link collapsed" id="{{$criterio->criterio}}"
+        href="{{ route('resultado', [$evaluacion->id,$criterio->id]) }}">
+        <i class="bi bi-{{$icons[$criterio->id-1]}}"></i><span>{{$criterio->criterio}}</span>
+    </a>
+</li>
+@endif
+@endforeach
 
 <!-- ======= Sidebar ======= -->
 <li>

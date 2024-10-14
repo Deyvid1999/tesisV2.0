@@ -1,13 +1,13 @@
 @extends('layouts.caces')
 @section('sidebar')
-@include('layouts.sidebar_inicio')
+@include('layouts.sidebar_evaluacion')
 @endsection
 @section('content')
     <div class="pagetitle">
-        <h3>UNIVERSIDADES</h3>
+        <h3>EVALUACIONES</h3>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('universidades.index') }}">Universidades</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('evaluaciones.show',$universidad->id) }}">Evaluaciones</a></li>
                 <li class="breadcrumb-item active">Editar</li>
             </ol>
         </nav>
@@ -18,16 +18,16 @@
                 <h6 class="fw-normal text-actualizar text-uppercase">Editar registro</h6>
             </div>
             <div class="container-fluid mt-3">
-                <form method="POST" action="{{ route('universidades.update', $universidad->id) }}"
+                <form method="POST" action="{{ route('evaluaciones.update', $evaluacion->id) }}"
                     enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-                    @include('acreditacion_caces.universidades.form')
+                    @include('acreditacion_caces.evaluaciones.form')
                     <div class="modal-footer justify-content-center">
                         <button type="submit" class="btn btn-actualizar"><i class="bi bi-check-circle"></i>
                             ACTUALIZAR</button>
                         <a type="button" class="btn btn-outline-actualizar"
-                            href="{{ route('universidades.index') }}">CANCELAR</a>
+                            href="{{ route('evaluaciones.show', $universidad->id) }}">CANCELAR</a>
                     </div>
                 </form>
             </div>
@@ -36,6 +36,6 @@
 @endsection
 @section('scripts')
     <script>
-        document.getElementById('universidades').classList.remove('collapsed');
+        document.getElementById('evaluaciones').classList.remove('collapsed');
     </script>
 @endsection

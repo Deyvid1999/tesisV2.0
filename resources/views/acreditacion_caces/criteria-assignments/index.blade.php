@@ -36,7 +36,7 @@
                             {{ $criterio->criterio }}
                         </td>
                         <td>
-                        <label>{{$criterio->responsable}}</label>
+                            <label>{{$criterio->responsable}}</label>
 
                         </td>
                         <td>
@@ -47,6 +47,24 @@
                     @endforeach
                 </tbody>
             </table>
+        </div>
+        <div class="row">
+            <div class="col-md-4 ">
+                @if ($message = Session::get('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="bi bi-check-circle me-1"></i>
+                    {{ $message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                @endif
+                @if ($message = Session::get('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="bi bi-check-circle me-1"></i>
+                    {{ $message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                @endif
+            </div>
         </div>
     </div>
 </div>

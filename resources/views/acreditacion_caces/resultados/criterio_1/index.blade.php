@@ -39,22 +39,22 @@
                 <div class="card-body pt-3" style="margin-top: 20px;">
                     <div class="row text-center">
                         <div class="col-sm-4">
-                            @if ($total_criterio_1 >= 80)
+                            @if ($total_criterio >= 80)
                                 <i class="bi bi-check-circle-fill text-actualizar" style="font-size: 40px"></i>
                             @else
                                 <i class="bi bi-exclamation-circle-fill alerta" style="font-size: 40px"></i>
                             @endif
                         </div>
                         <div class="col-sm-8">
-                            <h2 style="font-size: 40px; color:{{ $total_criterio_1 >= 80 ? '#00c851' : '#ff3547' }}">
-                                {{ $total_criterio_1 }}%</h2>
+                            <h2 style="font-size: 40px; color:{{ $total_criterio >= 80 ? '#00c851' : '#ff3547' }}">
+                                {{ $total_criterio }}%</h2>
                             <p>Puntaje eje de evaluación: <span class="text-danger">16.667 -> 100%</span></p>
                         </div>
                     </div>
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-                            style="width: {{ $total_criterio_1 }}%; background-color: {{ $total_criterio_1 >= 80 ? '#00c851' : '#ff3547' }};"
-                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{ $total_criterio_1 }}%</div>
+                            style="width: {{ $total_criterio }}%; background-color: {{ $total_criterio >= 80 ? '#00c851' : '#ff3547' }};"
+                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{ $total_criterio }}%</div>
                     </div>
                 </div>
             </div>
