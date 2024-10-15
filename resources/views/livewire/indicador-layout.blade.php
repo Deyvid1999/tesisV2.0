@@ -17,148 +17,150 @@
             </h3>
         </div>
         @if (!$sub_criterios->isEmpty())
-        @foreach ($sub_criterios as $sub_criterio)
-        <div class="card">
-            <div class="card-header" style="font-size: 15px; color: #1B295B">
-                {{ $sub_criterio->subcriterio }} <b
-                    style="margin-left: 20px; color: red;">{{ $sub_criterio->porcentaje }}
-                    %</b>
-            </div>
-            @foreach ($sub_criterio->indicadors as $indicador)
-            <div class="card-body" id="indicador_{{ $indicador->id }}" style="padding-top: 25px;">
-                <h5 class="card-title mt-3" style="color: #0c63e4">{{ $indicador->indicador }} <b
-                        style="margin-left: 20px; color: red;">{{ $indicador->porcentaje }} %</b>
-                </h5>
-                <span><b>ESTANDAR</b></span>
-                <p class="card-text">{{ $indicador->estandar }}</p>
-                <span><b>PERÍODO DE EVALUACIÓN</b></span>
-                <p class="card-text">{{ $indicador->periodo }}</p>
-                <div class="accordion">
-                    {{-- ACORDION PARA ELEMENTOS FUNDAMENTALES --}}
-                    @if (!$indicador->elemento_fundamentals->isEmpty())
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="heading_{{ $indicador->id }}">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapse_{{ $indicador->id }}" aria-expanded="false"
-                                aria-controls="collapse_{{ $indicador->id }}">
-                                <span>ELEMENTOS FUNDAMENTALES</span>
-                            </button>
-                        </h2>
-                        <div id="collapse_{{ $indicador->id }}" class="accordion-collapse collapse"
-                            aria-labelledby="heading_{{ $indicador->id }}" data-bs-parent="#caces">
-                            <div class="accordion-body">
-                                @livewire('indicador-layout', ['id_indicador' => $indicador->id, 'id_evaluacion' => $evaluacion->id])
-                            </div>
-                        </div>
+            @foreach ($sub_criterios as $sub_criterio)
+                <div class="card">
+                    <div class="card-header" style="font-size: 15px; color: #1B295B">
+                        {{ $sub_criterio->subcriterio }} <b
+                            style="margin-left: 20px; color: red;">{{ $sub_criterio->porcentaje }}
+                            %</b>
                     </div>
-                    @else
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="heading_{{ $indicador->id }}">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapse_{{ $indicador->id }}" aria-expanded="false"
-                                aria-controls="collapse_{{ $indicador->id }}">
-                                <span>FORMULA DE CALCULO</span>
-                            </button>
-                        </h2>
-                        <div id="collapse_{{ $indicador->id }}" class="accordion-collapse collapse"
-                            aria-labelledby="heading_{{ $indicador->id }}" data-bs-parent="#caces">
-                            <div class="accordion-body">
-                                @livewire('indicador-layout', ['id_indicador' => $indicador->id, 'id_evaluacion' => $evaluacion->id])
+                    @foreach ($sub_criterio->indicadors as $indicador)
+                        @if (auth()->user()->can('admin') || auth()->user()->can("$evaluacion->id-$indicador->id"))
+                            <div class="card-body" id="indicador_{{ $indicador->id }}" style="padding-top: 25px;">
+                                <h5 class="card-title mt-3" style="color: #0c63e4">{{ $indicador->indicador }} <b
+                                        style="margin-left: 20px; color: red;">{{ $indicador->porcentaje }} %</b>
+                                </h5>
+                                <span><b>ESTANDAR</b></span>
+                                <p class="card-text">{{ $indicador->estandar }}</p>
+                                <span><b>PERÍODO DE EVALUACIÓN</b></span>
+                                <p class="card-text">{{ $indicador->periodo }}</p>
+                                <div class="accordion">
+                                    {{-- ACORDION PARA ELEMENTOS FUNDAMENTALES --}}
+                                    @if (!$indicador->elemento_fundamentals->isEmpty())
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="heading_{{ $indicador->id }}">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                                    data-bs-target="#collapse_{{ $indicador->id }}" aria-expanded="false"
+                                                    aria-controls="collapse_{{ $indicador->id }}">
+                                                    <span>ELEMENTOS FUNDAMENTALES</span>
+                                                </button>
+                                            </h2>
+                                            <div id="collapse_{{ $indicador->id }}" class="accordion-collapse collapse"
+                                                aria-labelledby="heading_{{ $indicador->id }}" data-bs-parent="#caces">
+                                                <div class="accordion-body">
+                                                    @livewire('indicador-layout', ['id_indicador' => $indicador->id, 'id_evaluacion' => $evaluacion->id])
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @else
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="heading_{{ $indicador->id }}">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                                    data-bs-target="#collapse_{{ $indicador->id }}" aria-expanded="false"
+                                                    aria-controls="collapse_{{ $indicador->id }}">
+                                                    <span>FORMULA DE CALCULO</span>
+                                                </button>
+                                            </h2>
+                                            <div id="collapse_{{ $indicador->id }}" class="accordion-collapse collapse"
+                                                aria-labelledby="heading_{{ $indicador->id }}" data-bs-parent="#caces">
+                                                <div class="accordion-body">
+                                                    @livewire('indicador-layout', ['id_indicador' => $indicador->id, 'id_evaluacion' => $evaluacion->id])
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                    {{-- FIN ACORDION PARA ELEMENTOS FUNDAMENTALES --}}
+                                    {{-- ACORDION PARA FUENTES DE INFORMACION --}}
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="heading_fi_{{ $indicador->id }}">
+                                            <button class="accordion-button collapsed" style="background: #697bbc" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#collapse_fi_{{ $indicador->id }}"
+                                                aria-expanded="false" aria-controls="collapse_fi_{{ $indicador->id }}">
+                                                <span>FUENTE DE INFORMACIÓN</span>
+                                            </button>
+                                        </h2>
+                                        <div id="collapse_fi_{{ $indicador->id }}" class="accordion-collapse collapse"
+                                            aria-labelledby="heading_fi_{{ $indicador->id }}" data-bs-parent="#caces">
+                                            <div class="accordion-body">
+                                                @livewire('fuente-layout', ['id_indicador' => $indicador->id, 'id_evaluacion' => $evaluacion->id])
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{-- FIN ACORDION PARA FUENTES DE INFORMACION --}}
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    @endif
-                    {{-- FIN ACORDION PARA ELEMENTOS FUNDAMENTALES --}}
-                    {{-- ACORDION PARA FUENTES DE INFORMACION --}}
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="heading_fi_{{ $indicador->id }}">
-                            <button class="accordion-button collapsed" style="background: #697bbc"
-                                type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapse_fi_{{ $indicador->id }}" aria-expanded="false"
-                                aria-controls="collapse_fi_{{ $indicador->id }}">
-                                <span>FUENTE DE INFORMACIÓN</span>
-                            </button>
-                        </h2>
-                        <div id="collapse_fi_{{ $indicador->id }}" class="accordion-collapse collapse"
-                            aria-labelledby="heading_fi_{{ $indicador->id }}" data-bs-parent="#caces">
-                            <div class="accordion-body">
-                                @livewire('fuente-layout', ['id_indicador' => $indicador->id, 'id_evaluacion' => $evaluacion->id])
-                            </div>
-                        </div>
-                    </div>
-                    {{-- FIN ACORDION PARA FUENTES DE INFORMACION --}}
+                        @endif
+                    @endforeach
                 </div>
-            </div>
             @endforeach
-        </div>
-        @endforeach
         @else
-        @foreach ($indicadors as $indicador)
-        <div class="card-body" id="indicador_{{ $indicador->id }}" style="padding-top: 25px;">
-            <h5 class="card-title mt-3" style="color: #0c63e4">{{ $indicador->indicador }} <b
-                    style="margin-left: 20px; color: red;">{{ $indicador->porcentaje }} %</b>
-            </h5>
-            <span><b>ESTANDAR</b></span>
-            <p class="card-text">{{ $indicador->estandar }}</p>
-            <span><b>PERÍODO DE EVALUACIÓN</b></span>
-            <p class="card-text">{{ $indicador->periodo }}</p>
-            <div class="accordion">
-                {{-- ACORDION PARA ELEMENTOS FUNDAMENTALES --}}
-                @if (!$indicador->elemento_fundamentals->isEmpty())
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="heading_{{ $indicador->id }}">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapse_{{ $indicador->id }}" aria-expanded="false"
-                            aria-controls="collapse_{{ $indicador->id }}">
-                            <span>ELEMENTOS FUNDAMENTALES</span>
-                        </button>
-                    </h2>
-                    <div id="collapse_{{ $indicador->id }}" class="accordion-collapse collapse"
-                        aria-labelledby="heading_{{ $indicador->id }}" data-bs-parent="#caces">
-                        <div class="accordion-body">
-                            @livewire('indicador-layout', ['id_indicador' => $indicador->id, 'id_evaluacion' => $evaluacion->id])
+            @foreach ($indicadors as $indicador)
+                @if (auth()->user()->can('admin') || auth()->user()->can("$evaluacion->id-$indicador->id"))
+                    <div class="card-body" id="indicador_{{ $indicador->id }}" style="padding-top: 25px;">
+                        <h5 class="card-title mt-3" style="color: #0c63e4">{{ $indicador->indicador }} <b
+                                style="margin-left: 20px; color: red;">{{ $indicador->porcentaje }} %</b>
+                        </h5>
+                        <span><b>ESTANDAR</b></span>
+                        <p class="card-text">{{ $indicador->estandar }}</p>
+                        <span><b>PERÍODO DE EVALUACIÓN</b></span>
+                        <p class="card-text">{{ $indicador->periodo }}</p>
+                        <div class="accordion">
+                            {{-- ACORDION PARA ELEMENTOS FUNDAMENTALES --}}
+                            @if (!$indicador->elemento_fundamentals->isEmpty())
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="heading_{{ $indicador->id }}">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapse_{{ $indicador->id }}" aria-expanded="false"
+                                            aria-controls="collapse_{{ $indicador->id }}">
+                                            <span>ELEMENTOS FUNDAMENTALES</span>
+                                        </button>
+                                    </h2>
+                                    <div id="collapse_{{ $indicador->id }}" class="accordion-collapse collapse"
+                                        aria-labelledby="heading_{{ $indicador->id }}" data-bs-parent="#caces">
+                                        <div class="accordion-body">
+                                            @livewire('indicador-layout', ['id_indicador' => $indicador->id, 'id_evaluacion' => $evaluacion->id])
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="heading_{{ $indicador->id }}">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapse_{{ $indicador->id }}" aria-expanded="false"
+                                            aria-controls="collapse_{{ $indicador->id }}">
+                                            <span>FORMULA DE CALCULO</span>
+                                        </button>
+                                    </h2>
+                                    <div id="collapse_{{ $indicador->id }}" class="accordion-collapse collapse"
+                                        aria-labelledby="heading_{{ $indicador->id }}" data-bs-parent="#caces">
+                                        <div class="accordion-body">
+                                            @livewire('indicador-layout', ['id_indicador' => $indicador->id, 'id_evaluacion' => $evaluacion->id])
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                            {{-- FIN ACORDION PARA ELEMENTOS FUNDAMENTALES --}}
+                            {{-- ACORDION PARA FUENTES DE INFORMACION --}}
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="heading_fi_{{ $indicador->id }}">
+                                    <button class="accordion-button collapsed" style="background: #697bbc" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#collapse_fi_{{ $indicador->id }}"
+                                        aria-expanded="false" aria-controls="collapse_fi_{{ $indicador->id }}">
+                                        <span>FUENTE DE INFORMACIÓN</span>
+                                    </button>
+                                </h2>
+                                <div id="collapse_fi_{{ $indicador->id }}" class="accordion-collapse collapse"
+                                    aria-labelledby="heading_fi_{{ $indicador->id }}" data-bs-parent="#caces">
+                                    <div class="accordion-body">
+                                        @livewire('fuente-layout', ['id_indicador' => $indicador->id, 'id_evaluacion' => $evaluacion->id])
+                                    </div>
+                                </div>
+                            </div>
+                            {{-- FIN ACORDION PARA FUENTES DE INFORMACION --}}
                         </div>
                     </div>
-                </div>
-                @else
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="heading_{{ $indicador->id }}">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapse_{{ $indicador->id }}" aria-expanded="false"
-                            aria-controls="collapse_{{ $indicador->id }}">
-                            <span>FORMULA DE CALCULO</span>
-                        </button>
-                    </h2>
-                    <div id="collapse_{{ $indicador->id }}" class="accordion-collapse collapse"
-                        aria-labelledby="heading_{{ $indicador->id }}" data-bs-parent="#caces">
-                        <div class="accordion-body">
-                            @livewire('indicador-layout', ['id_indicador' => $indicador->id, 'id_evaluacion' => $evaluacion->id])
-                        </div>
-                    </div>
-                </div>
                 @endif
-                {{-- FIN ACORDION PARA ELEMENTOS FUNDAMENTALES --}}
-                {{-- ACORDION PARA FUENTES DE INFORMACION --}}
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="heading_fi_{{ $indicador->id }}">
-                        <button class="accordion-button collapsed" style="background: #697bbc"
-                            type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapse_fi_{{ $indicador->id }}" aria-expanded="false"
-                            aria-controls="collapse_fi_{{ $indicador->id }}">
-                            <span>FUENTE DE INFORMACIÓN</span>
-                        </button>
-                    </h2>
-                    <div id="collapse_fi_{{ $indicador->id }}" class="accordion-collapse collapse"
-                        aria-labelledby="heading_fi_{{ $indicador->id }}" data-bs-parent="#caces">
-                        <div class="accordion-body">
-                            @livewire('fuente-layout', ['id_indicador' => $indicador->id, 'id_evaluacion' => $evaluacion->id])
-                        </div>
-                    </div>
-                </div>
-                {{-- FIN ACORDION PARA FUENTES DE INFORMACION --}}
-            </div>
-        </div>
-        @endforeach
+            @endforeach
         @endif
 
     </div>
