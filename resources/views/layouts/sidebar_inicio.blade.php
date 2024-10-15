@@ -15,8 +15,10 @@
         <i class="bi bi-grid"></i><span>SEDES</span>
     </a>
 </li>
+@can('admin')
 <li class="nav-item">
     <a class="nav-link collapsed" id="new_user" href="{{ route('register') }}">
         <i class="bi bi-person"></i><span>Registrar usuarios</span>
     </a>
 </li>
+@endcan

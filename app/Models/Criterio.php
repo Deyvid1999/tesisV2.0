@@ -46,4 +46,9 @@ class Criterio extends Model
 	{
 		return $this->hasMany(Subcriterio::class, 'cri_id');
 	}
+
+	public function indicadorsSub()
+    {
+        return $this->hasManyThrough(Indicador::class, Subcriterio::class,'cri_id','sub_id','id','id');
+    }
 }

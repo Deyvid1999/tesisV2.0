@@ -1,5 +1,5 @@
 <li class="nav-item">
-    <a class="nav-link collapsed" id="inicio" href="{{ route('evaluaciones.index', $evaluacion->uni_id) }}">
+    <a class="nav-link collapsed" id="inicio" href="{{ route('evaluaciones.show', $evaluacion->uni_id) }}">
         <i class="bi bi-arrow-return-left"></i><span>Regresar</span>
     </a>
 </li>
@@ -37,14 +37,13 @@
 $icons=['building','book','people','lightbulb','link','trophy'];
 @endphp
 @foreach ($criterios as $criterio )
-@can("criterio_$criterio->id")
-    <li class="nav-item">
-        <a class="nav-link collapsed" id="criterio_{{$criterio->id}}" href="{{ route('criterio', [$evaluacion->id,$criterio->id]) }}">
-            <i class="bi bi-{{$icons[$criterio->id-1]}}"></i><span>{{mb_convert_case($criterio->criterio,MB_CASE_TITLE, "UTF-8")}}</span>
-        </a>
-    </li>
-    @endcan
-
+@if (auth()->user()->can("admin")||auth()->user()->can("$evaluacion->id/$criterio->id"))
+<li class="nav-item">
+    <a class="nav-link collapsed" id="criterio_{{$criterio->id}}" href="{{ route('criterio', [$evaluacion->id,$criterio->id]) }}">
+        <i class="bi bi-{{$icons[$criterio->id-1]}}"></i><span>{{mb_convert_case($criterio->criterio,MB_CASE_TITLE, "UTF-8")}}</span>
+    </a>
+</li>
+@endif
 @endforeach
 <!-- ======= Sidebar ======= -->
 <li>

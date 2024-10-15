@@ -58,28 +58,22 @@ Route::middleware(['auth'])->group(function () {
     
 
     //PARA CREAR LAS EVALUACIONES
-    Route::get('evaluaciones/{id}', [EvaluacionController::class, 'index'])->name('evaluaciones.index');
-    Route::post('evaluaciones', [EvaluacionController::class, 'store'])->name('evaluaciones.store');
-    
+    Route::resource('evaluaciones', EvaluacionController::class)->names('evaluaciones');
+  
     // PARA CREAR LA COMPARATIVA DE LOS VALORES
     Route::get('historico-grafico/{id}', [HistoricoController::class, 'grafico'])->name('historico.grafico.index');
     Route::get('historico/{id}', [HistoricoController::class, 'index'])->name('historico.index');
     
     
     // INDICADORES
-    Route::get('indicadores/{id}', [IndicadorController::class, 'index'])->name('indicadores.index');
+    Route::get('{id}/indicadores', [IndicadorController::class, 'index'])->name('indicadores.index');
     
     //INFORMES
     Route::get('informes-criterios/{id}', [InformesCriteriosController::class, 'index'])->name('informes.criterios.index');
     Route::get('informes-oportunidad-mejora/{id}', [InformesCriteriosController::class, 'mejora'])->name('informes.mejora');
     
     //RESULTADOS
-    Route::get('indicadores/condiciones-institucionales/{id}', [IndicadorController::class, 'resultadoCriterio1'])->name('condiciones.institucionales.resultado');
-    Route::get('indicadores/docencia/{id}', [IndicadorController::class, 'resultadoCriterio2'])->name('docencia.resultado');
-    Route::get('indicadores/personal-academico/{id}', [IndicadorController::class, 'resultadoCriterio3'])->name('personal.academico.resultado');
-    Route::get('indicadores/investigacion/{id}', [IndicadorController::class, 'resultadoCriterio4'])->name('investigacion.resultado');
-    Route::get('indicadores/vinculacion/{id}', [IndicadorController::class, 'resultadoCriterio5'])->name('vinculacion.resultado');
-    Route::get('indicadores/gestion-calidad/{id}', [IndicadorController::class, 'resultadoCriterio6'])->name('gestion.calidad.resultado');
+    Route::get('{eva_id}/indicadores/{cri_id}', [IndicadorController::class, 'resultadoCriterio'])->name('resultado');
     
     //INFORMES
     Route::get('personal-academico/excel/{id}', [PersonalAcademicoController::class, 'personalAcademicoExcel'])->name('personal.academico.excel');

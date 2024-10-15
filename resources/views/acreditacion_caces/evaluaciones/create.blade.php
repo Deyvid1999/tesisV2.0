@@ -1,6 +1,6 @@
 @extends('layouts.caces')
 @section('sidebar')
-@include('layouts.sidebar_inicio')
+@include('layouts.sidebar_evaluacion')
 @endsection
 @section('content')
     <div class="pagetitle">

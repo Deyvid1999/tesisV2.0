@@ -69,7 +69,7 @@
         <tr>
             <td>CONDICIONES INSTITUCIONALES</td>
             <td>80%</td>
-            <td>{{ $total_criterio_1 }}%</td>
+            <td>{{ $total_criterio }}%</td>
         </tr>
         <tr>
             <td>DOCENCIA</td>
@@ -94,14 +94,14 @@
         <tr>
             <td>SISTEMA DE GESTIÓN DE LA CALIDAD</td>
             <td>80%</td>
-            <td>{{ $total_criterio_6 }}%</td>
+            <td>{{ $total_criterio }}%</td>
         </tr>
         <!-- Repite esta estructura para las otras áreas -->
     </table>
     <div class="resultados">
         <h2>Puntaje Total de Autoevaluación</h2>
         <p>El puntaje total de autoevaluación obtenido es
-            {{ round(($total_criterio_1 + $total_criterio_2 + $total_criterio_3 + $total_criterio_4 + $total_criterio_5 + $total_criterio_6) / 6 ,2) }}% sobre 100%.</p>
+            {{ round(($total_criterio + $total_criterio_2 + $total_criterio_3 + $total_criterio_4 + $total_criterio_5 + $total_criterio) / 6 ,2) }}% sobre 100%.</p>
     </div>
 
     <div class="resultados">

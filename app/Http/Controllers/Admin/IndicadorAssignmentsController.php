@@ -45,6 +45,12 @@ class IndicadorAssignmentsController extends Controller
         $userId = $request->user_id;
         $indicadorId = $request->indicador_id;
         $evaluacionId = $request->evaluacion_id;
+        $indicador=Indicador::where('id',$indicadorId)->first();
+        try {
+            $cri_id=$indicador->subcriterio->criterio->id;
+        } catch (\Throwable $th) {
+            $cri_id=$indicador->criterio->id;
+        }
         $indicadors = Indicador::all();
         $users = User::all();
         $evaluacion = Evaluacion::find($evaluacionId);
@@ -58,11 +64,14 @@ class IndicadorAssignmentsController extends Controller
             Permission::create(['name' => $permissionName, "guard_name" => 'web']);
             app()['cache']->forget('spatie.permission.cache');
             $user->givePermissionTo($permissionName);
+            $user->givePermissionTo("$evaluacionId/$cri_id");
         } catch (\Throwable $th) {
+            app()['cache']->forget('spatie.permission.cache');
             $oldUser = User::permission($permissionName)->get()->first();
             $oldUser->removeRole($rolName);
             $oldUser->revokePermissionTo($permissionName);
             $user->givePermissionTo($permissionName);
+            $user->givePermissionTo("$evaluacionId/$cri_id");
         }
 
         foreach ($indicadors as $key => $indicador) {
