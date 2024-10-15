@@ -105,7 +105,31 @@
     $colors=['#008A94','#AD2E0D','#287C27','#7A287C','#967a02','#39389E'];
     @endphp
     @foreach ($criterios as $criterio )
-    @if (auth()->user()->can("criterio_$criterio->id")||auth()->user()->can("$evaluacion->id/$criterio->id"))
+    @php
+    $permissions = auth()->user()->getAllPermissions();
+
+    $hasPermission = false;
+
+    foreach ($permissions as $permission) {
+    foreach($criterio->indicadors as $indicador){
+    if (Str::startsWith($permission->name, "$evaluacion->id-$indicador->id")) {
+    dd($indicador->id);
+    $hasPermission = true;
+    break;
+    }
+    }
+    foreach($criterio->indicadorsSub as $indicador){
+    if (Str::startsWith($permission->name, "$evaluacion->id-$indicador->id")) {
+    $hasPermission = true;
+    break;
+    }
+    }
+    if($hasPermission){
+    break;
+    }
+    }
+    @endphp
+    @if (auth()->user()->can("admin")||auth()->user()->can("$evaluacion->id/$criterio->id")||$hasPermission)
     <div class="col-sm-4">
         <div class="card mb-3">
             <a href="{{ route('resultado', [$evaluacion->id,$criterio->id]) }}">
@@ -135,7 +159,7 @@
                 </div>
             </div>
         </div>
-    </div>        
+    </div>
     @endif
     @endforeach
 </div>

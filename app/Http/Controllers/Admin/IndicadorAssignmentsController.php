@@ -20,7 +20,9 @@ class IndicadorAssignmentsController extends Controller
         $permisos=[];
         $criterios=Criterio::all();
         $indicadors = Indicador::all();
-        $users = User::all();
+        $users = $usuarios = User::whereDoesntHave('roles', function ($query) {
+            $query->where('name', 'admin');
+        })->get();
         $evaluacion = Evaluacion::find($id);
         $responsable = User::where('id',);
 
@@ -72,6 +74,7 @@ class IndicadorAssignmentsController extends Controller
             $oldUser->revokePermissionTo($permissionName);
             $user->givePermissionTo($permissionName);
             $user->givePermissionTo("$evaluacionId/$cri_id");
+            app()['cache']->forget('spatie.permission.cache');
         }
 
         foreach ($indicadors as $key => $indicador) {
@@ -85,6 +88,6 @@ class IndicadorAssignmentsController extends Controller
                 $permisos[$indId]  = 'No asignado';
             }
         }
-        return view('acreditacion_caces.indicador-assignments.index', compact('permisos','criterios','users', 'evaluacion'));
+        return redirect()->route('indicador.assignments.show',$evaluacionId);
     }
 }

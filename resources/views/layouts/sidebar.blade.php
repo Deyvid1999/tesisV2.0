@@ -37,7 +37,29 @@
 $icons=['building','book','people','lightbulb','link','trophy'];
 @endphp
 @foreach ($criterios as $criterio )
-@if (auth()->user()->can("admin")||auth()->user()->can("$evaluacion->id/$criterio->id"))
+@php
+$permissions = auth()->user()->getAllPermissions();
+
+$hasPermission = false;
+foreach ($permissions as $permission) {
+foreach($criterio->indicadors as $indicador){
+if (Str::startsWith($permission->name, "$evaluacion->id-$indicador->id")) {
+$hasPermission = true;
+break;
+}
+}
+foreach($criterio->indicadorsSub as $indicador){
+if (Str::startsWith($permission->name, "$evaluacion->id-$indicador->id")) {
+$hasPermission = true;
+break;
+}
+}
+if($hasPermission){
+break;
+}
+}
+@endphp
+@if (auth()->user()->can("admin")||auth()->user()->can("$evaluacion->id/$criterio->id")||$hasPermission)
 <li class="nav-item">
     <a class="nav-link collapsed" id="criterio_{{$criterio->id}}" href="{{ route('criterio', [$evaluacion->id,$criterio->id]) }}">
         <i class="bi bi-{{$icons[$criterio->id-1]}}"></i><span>{{mb_convert_case($criterio->criterio,MB_CASE_TITLE, "UTF-8")}}</span>
