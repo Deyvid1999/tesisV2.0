@@ -12,6 +12,7 @@
     </nav>
 </div>
 @foreach ($criterios as $criterio )
+@can("criterio_1criterio->id")
 @if(!$criterio->subcriterios->isEmpty())
 <div class="card">
     <div class="card-header pb-2">
@@ -58,6 +59,8 @@
     @endforeach
 </div>
 @else
+@endcan
+
 <div class="card">
     <div class="card-header pb-2">
         <h6 class="fw-normal text-pacifico text-uppercase">Lista Indicadores de {{$criterio->criterio}}</h6>

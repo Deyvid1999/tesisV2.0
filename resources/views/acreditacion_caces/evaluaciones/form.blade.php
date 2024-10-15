@@ -13,11 +13,11 @@
     <div class="col-sm-6 mb-3">
         <label for="departamento" class="form-label">Departamento<samp class="text-eliminar">*</samp></label>
         <input type="text" class="form-control" name="departamento" id="departamento" required
-            value="{{ isset($evaluacion->departamento) ? $evaluacion->departamento : old('departamento') }}">
+            value="TODOS" readonly>
     </div>
-    <div class="col-sm-6 mb-3">
+    <div class="col-sm-6 mb-3" style="display: none;">
         <label for="facultad" class="form-label">Facultad<samp class="text-eliminar">*</samp></label>
-        <input type="text" class="form-control" name="facultad" id="facultad" required
-            value="{{ isset($evaluacion->facultad) ? $evaluacion->facultad : old('facultad') }}">
+        <input type="text" class="form-control" name="facultad" id="facultad" required value="TODOS">
     </div>
+    
 </div>

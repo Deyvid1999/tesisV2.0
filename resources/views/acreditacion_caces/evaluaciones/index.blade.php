@@ -50,7 +50,7 @@
                             <th scope="col">PERÍODO</th>
                             <th scope="col">ADMINISTRADOR</th>
                             <th scope="col">DEPARTAMENTO</th>
-                            <th scope="col">FACULTAD</th>
+                            <!-- <th scope="col">FACULTAD</th> -->
                             <th scope="col">ACCIONES</th>
                         </tr>
                     </thead>
@@ -71,10 +71,10 @@
                                 </td>
                                 <td>
                                     {{ $evaluacion->departamento }}
-                                </td>
-                                <td>
-                                    {{ $evaluacion->facultad }}
-                                </td>
+                                </td>k
+                                
+                                    <!-- <td>{{ $evaluacion->facultad }}</td> --> 
+                                
                                 <td style="width: 160px;">
                                     <div class="nav fs-6">
                                         <a type="button" class="nav-link text-crear" title="Ingresar"

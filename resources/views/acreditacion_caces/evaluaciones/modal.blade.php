@@ -10,7 +10,7 @@
             <div class="modal-body">
                 <form method="POST" action="{{ url('evaluaciones') }}" enctype="multipart/form-data">
                     @csrf
-                    @include('acreditacion_caces.evaluaciones.form')
+                    @include('acreditacion_caces.evaluaciones.form')                  
                     <div class="modal-footer justify-content-center">
                         <button type="submit" class="btn btn-crear">
                             NUEVO PERIODO EVALUACIÓN</button>

@@ -14,8 +14,10 @@ class EvaluacionController extends Controller
     public function index($id)
     {
         $universidad = Universidad::find($id);
+        $evaluacion = Evaluacion::find($id);
+
         $evaluaciones = Evaluacion::where('uni_id', $id)->get();
-        return view('acreditacion_caces.evaluaciones.index', compact('universidad', 'evaluaciones',));
+        return view('acreditacion_caces.evaluaciones.index', compact('evaluacion', 'universidad', 'evaluaciones'));
     }
 
     public function store(Request $request){

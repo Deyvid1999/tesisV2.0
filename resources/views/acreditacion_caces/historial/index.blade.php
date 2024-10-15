@@ -54,8 +54,8 @@
                                                     sociedad con la oferta académica.</td>
                                                 @foreach ($evaluaciones as $evaluacion)
                                                     <td>
-                                                        @if (isset($indicador->res_indicador_29->where('evaluacion_id', $evaluacion->id)->first()->valoracion_29))
-                                                            @switch($indicador->res_indicador_29->where('evaluacion_id',
+                                                    @if ($indicador->resultados && $indicador->resultados->where('eva_id', $evaluacion->id)->first())
+                                                            @switch($indicador->criterio->where('eva_id',
                                                                 $evaluacion->id)->first()->valoracion_29)
                                                                 @case('SATISFACTORIO')
                                                                     <div class="badge bg-success">
@@ -101,8 +101,8 @@
                                                 <td>{{ $elementoFundamental->elemento }}</td>
                                                 @foreach ($evaluaciones as $evaluacion)
                                                     <td>
-                                                        @if (isset($elementoFundamental->res_docente->where('evaluacion_id', $evaluacion->id)->first()->valoracion))
-                                                            @switch($elementoFundamental->res_docente->where('evaluacion_id',
+                                                    @if ($indicador->resultados && $indicador->resultados->where('eva_id', $evaluacion->id)->first())
+                                                            @switch($elementoFundamental->resultados->where('eva_id',
                                                                 $evaluacion->id)->first()->valoracion)
                                                                 @case('100')
                                                                     <div class="badge bg-success">
@@ -122,8 +122,8 @@
                                                                     </div>
                                                             @endswitch
                                                         @endif
-                                                        @if (isset($elementoFundamental->res_vinculacion->where('evaluacion_id', $evaluacion->id)->first()->valoracion))
-                                                            @switch($elementoFundamental->res_vinculacion->where('evaluacion_id',
+                                                        @if ($indicador->resultados && $indicador->resultados->where('eva_id', $evaluacion->id)->first()->valoracion))
+                                                            @switch($elementoFundamental->resultados->where('eva_id',
                                                                 $evaluacion->id)->first()->valoracion)
                                                                 @case('100')
                                                                     <div class="badge bg-success">
@@ -155,8 +155,8 @@
                                                                     </div>
                                                             @endswitch
                                                         @endif
-                                                        @if (isset($elementoFundamental->res_gestion_calidad->where('evaluacion_id', $evaluacion->id)->first()->valoracion))
-                                                            @switch($elementoFundamental->res_gestion_calidad->where('evaluacion_id',
+                                                        @if (isset($elementoFundamental->resultados->where('eva_id', $evaluacion->id)->first()->valoracion))
+                                                            @switch($elementoFundamental->resultados->where('eva_id',
                                                                 $evaluacion->id)->first()->valoracion)
                                                                 @case('100')
                                                                     <div class="badge bg-success">
@@ -218,8 +218,11 @@
                                                 <td><strong>TPAFD:</strong> Tasa de personal académico con formación doctoral.</td>
                                                 @foreach ($evaluaciones as $evaluacion)
                                                     <td>
-                                                        @if (isset($indicador->res_indicador_16->where('evaluacion_id', $evaluacion->id)->first()->valoracion_16))
-                                                            @switch($indicador->res_indicador_16->where('evaluacion_id',
+                                                    @if ($indicador->resultados && $indicador->resultados->where('eva_id', $evaluacion->id)->first())
+    {{ $indicador->resultados->where('eva_id', $evaluacion->id)->first()->valoracion_16 }}
+
+
+                                                            @switch($indicador->resultados->where('eva_id',
                                                                 $evaluacion->id)->first()->valoracion_16)
                                                                 @case('SATISFACTORIO')
                                                                     <div class="badge bg-success">
@@ -262,8 +265,12 @@
                                                 <td><strong>TPTC:</strong> Tasa del personal académico con dedicación a tiempo completo</td>
                                                 @foreach ($evaluaciones as $evaluacion)
                                                     <td>
-                                                        @if (isset($indicador->res_indicador_17->where('evaluacion_id', $evaluacion->id)->first()->valoracion_17))
-                                                            @switch($indicador->res_indicador_17->where('evaluacion_id',
+                                                    @if ($indicador->resultados && $indicador->resultados->where('eva_id', $evaluacion->id)->first())
+    {{ $indicador->resultados->where('eva_id', $evaluacion->id)->first()->valoracion_17 }}
+
+
+
+                                                            @switch($indicador->resultados->where('eva_id',
                                                                 $evaluacion->id)->first()->valoracion_17)
                                                                 @case('SATISFACTORIO')
                                                                     <div class="badge bg-success">
@@ -306,8 +313,11 @@
                                                 <td><strong>TDG2:</strong> Tasa de deserción institucional de oferta académica de grado al segundo año.</td>
                                                 @foreach ($evaluaciones as $evaluacion)
                                                     <td>
-                                                        @if (isset($indicador->res_indicador_19->where('evaluacion_id', $evaluacion->id)->first()->valoracion_19))
-                                                            @switch($indicador->res_indicador_19->where('evaluacion_id',
+                                                    @if ($indicador->resultados && $indicador->resultados->where('eva_id', $evaluacion->id)->first())
+    {{ $indicador->resultados->where('eva_id', $evaluacion->id)->first()->valoracion_19 }}
+
+
+                                                            @switch($indicador->resultados->where('eva_id',
                                                                 $evaluacion->id)->first()->valoracion_19)
                                                                 @case('SATISFACTORIO')
                                                                     <div class="badge bg-success">
@@ -350,8 +360,10 @@
                                                 <td><strong>TTG:</strong> Tasa promedio de titulación institucional de grado.</td>
                                                 @foreach ($evaluaciones as $evaluacion)
                                                     <td>
-                                                        @if (isset($indicador->res_indicador_21->where('evaluacion_id', $evaluacion->id)->first()->valoracion_21))
-                                                            @switch($indicador->res_indicador_21->where('evaluacion_id',
+                                                        @if ($indicador->resultados && $indicador->resultados->where('eva_id', $evaluacion->id)->first())
+                                                        {{ $indicador->resultados->where('eva_id', $evaluacion->id)->first()->valoracion_21 }}
+
+                                                            @switch($indicador->resultados->where('eva_id',
                                                                 $evaluacion->id)->first()->valoracion_21)
                                                                 @case('SATISFACTORIO')
                                                                     <div class="badge bg-success">
@@ -394,8 +406,10 @@
                                                 <td><strong>TTP:</strong>  Tasa promedio de titulación institucional de posgrado.</td>
                                                 @foreach ($evaluaciones as $evaluacion)
                                                     <td>
-                                                        @if (isset($indicador->res_indicador_22->where('evaluacion_id', $evaluacion->id)->first()->valoracion_22))
-                                                            @switch($indicador->res_indicador_22->where('evaluacion_id',
+                                                        @if ($indicador->resultados && $indicador->resultados->where('eva_id', $evaluacion->id)->first())
+                                                        {{ $indicador->resultados->where('eva_id', $evaluacion->id)->first()->valoracion_22 }}
+
+                                                            @switch($indicador->resultados->where('eva_id',
                                                                 $evaluacion->id)->first()->valoracion_22)
                                                                 @case('SATISFACTORIO')
                                                                     <div class="badge bg-success">
@@ -438,8 +452,10 @@
                                                 <td><strong>IP:</strong> Porcentaje de proyectos concluidos o en ejecución con financiamiento externo o en redes respecto al total de proyectos de la UEP.</td>
                                                 @foreach ($evaluaciones as $evaluacion)
                                                     <td>
-                                                        @if (isset($indicador->res_indicador_25->where('evaluacion_id', $evaluacion->id)->first()->valoracion_25))
-                                                            @switch($indicador->res_indicador_25->where('evaluacion_id',
+                                                        @if ($indicador->resultados && $indicador->resultados->where('eva_id', $evaluacion->id)->first()))
+                                                        {{ $indicador->resultados->where('eva_id', $evaluacion->id)->first()->valoracion_25 }}
+
+                                                            @switch($indicador->resultados->where('eva_id',
                                                                 $evaluacion->id)->first()->valoracion_25)
                                                                 @case('SATISFACTORIO')
                                                                     <div class="badge bg-success">
@@ -482,8 +498,10 @@
                                                 <td><strong>IP:</strong> Índice de producción académica per cápita.</td>
                                                 @foreach ($evaluaciones as $evaluacion)
                                                     <td>
-                                                        @if (isset($indicador->res_indicador_26->where('evaluacion_id', $evaluacion->id)->first()->valoracion_26))
-                                                            @switch($indicador->res_indicador_26->where('evaluacion_id',
+                                                        @if ($indicador->resultados && $indicador->resultados->where('eva_id', $evaluacion->id)->first())
+                                                        {{ $indicador->resultados->where('eva_id', $evaluacion->id)->first()->valoracion_26 }}
+
+                                                            @switch($indicador->resultados->where('eva_id',
                                                                 $evaluacion->id)->first()->valoracion_26)
                                                                 @case('SATISFACTORIO')
                                                                     <div class="badge bg-success">
@@ -529,9 +547,10 @@
                                                 <td>{{ $elementoFundamental->elemento }}</td>
                                                 @foreach ($evaluaciones as $evaluacion)
                                                     <td>
-                                                        @if (isset(
-                                                                $elementoFundamental->res_condicion_institucion->where('evaluacion_id', $evaluacion->id)->first()->valoracion))
-                                                            @switch($elementoFundamental->res_condicion_institucion->where('evaluacion_id',
+                                                    @if ($indicador->resultados && $indicador->resultados->where('eva_id', $evaluacion->id)->first())
+                                                    {{ $indicador->resultados->where('eva_id', $evaluacion->id)->first()->valoracion }}
+
+                                                            @switch($elementoFundamental->resultados->where('eva_id',
                                                                 $evaluacion->id)->first()->valoracion)
                                                                 @case('100')
                                                                     <div class="badge bg-success">
@@ -563,8 +582,8 @@
                                                                     </div>
                                                             @endswitch
                                                         @endif
-                                                        @if (isset($elementoFundamental->res_academicos->where('evaluacion_id', $evaluacion->id)->first()->valoracion))
-                                                            @switch($elementoFundamental->res_academicos->where('evaluacion_id',
+                                                        @if (isset($elementoFundamental->resultados->where('eva_id', $evaluacion->id)->first()->valoracion))
+                                                            @switch($elementoFundamental->resultados->where('eva_id',
                                                                 $evaluacion->id)->first()->valoracion)
                                                                 @case('100')
                                                                     <div class="badge bg-success">
@@ -596,8 +615,8 @@
                                                                     </div>
                                                             @endswitch
                                                         @endif
-                                                        @if (isset($elementoFundamental->res_investigacions->where('evaluacion_id', $evaluacion->id)->first()->valoracion))
-                                                            @switch($elementoFundamental->res_investigacions->where('evaluacion_id',
+                                                        @if (isset($elementoFundamental->resultados->where('eva_id', $evaluacion->id)->first()->valoracion))
+                                                            @switch($elementoFundamental->resultados->where('eva_id',
                                                                 $evaluacion->id)->first()->valoracion)
                                                                 @case('100')
                                                                     <div class="badge bg-success">

@@ -53,26 +53,34 @@
     <div class="row justify-content-center">
         <div class="card pt-5 pb-3" style="width: 100%">
             <div class="row">
-                <div class="col-md-4 text-center">
-                    @isset($evaluacion->universidad->foto)
-                        @if ($evaluacion->universidad->foto != '')
-                            <img src="{{ asset('storage/app/public') . '/' . $evaluacion->universidad->foto }}" alt="foto"
-                                width="auto" height="140px" title='foto'>
-                        @endif
+            <div class="row justify-content-center">
+    <div class="card pt-5 pb-3" style="width: 100%">
+        <div class="row"> <!-- Cambié < a <div -->
+            <div class="col-md-4 text-center">
+                @isset($evaluacion->universidad->foto)
+                    @if ($evaluacion->universidad->foto != '')
+                        <img src="{{ asset('storage/' . $evaluacion->universidad->foto) }}" alt="foto"
+                             width="auto" height="140px" title='foto'>
                     @else
                         <i class="bi bi-person-square" height="50px"></i>
-                    @endisset
-                    <div class="pagetitle pt-3">
-                        <h3 class="text-uppercase">{{ $evaluacion->universidad->universidad }}</h3>
-                        <p class="fs-6 text-uppercase">{{ $evaluacion->universidad->codigo_unico }}</p>
-                    </div>
+                    @endif
+                @else
+                    <i class="bi bi-person-square" height="50px"></i>
+                @endisset
+                <div class="pagetitle pt-3">
+                    <h3 class="text-uppercase">{{ $evaluacion->universidad->universidad }}</h3>
+                    <p class="fs-6 text-uppercase">{{ $evaluacion->universidad->codigo_unico }}</p>
                 </div>
+            </div>
+
+   
+
                 <div class="col-md-8">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">
-                                <p class="card-text text-uppercase"><strong>Universidad:</strong>
-                                    {{ $evaluacion->universidad->universidad }}</p>
+                               <!-- <p class="card-text text-uppercase"><strong>Universidad:</strong>
+                                    {{ $evaluacion->universidad->universidad }}</p> -->
                                 <p class="card-text text-uppercase"><strong>Campus:</strong>
                                     {{ $evaluacion->universidad->campus }}</p>
                                 <p class="card-text text-uppercase"><strong>Sede:</strong>
@@ -84,8 +92,8 @@
                                     {{ $evaluacion->fecha_creacion }}</p>
                             </div>
                             <div class="col-md-6">
-                                <p class="card-text text-uppercase"><strong>Facultad:</strong>
-                                    {{ $evaluacion->facultad }}</p>
+                               <!-- <p class="card-text text-uppercase"><strong>Facultad:</strong>
+                                    {{ $evaluacion->facultad }}</p> -->
                                 <p class="card-text text-uppercase"><strong>Departamento:</strong>
                                     {{ $evaluacion->departamento }}</p>
                                 <p class="card-text text-uppercase"><strong>Evaluador:</strong>

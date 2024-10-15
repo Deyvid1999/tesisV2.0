@@ -1,8 +1,9 @@
+
 <li class="nav-heading">CONFIGURACIÓN DE LOS PORCENTAJES</li>
 <li class="nav-item">
-    <a class="nav-link collapsed" id="inicio" href="{{ route('universidades.index') }}">
-        <i class="bi bi-arrow-return-left"></i><span>Regresar</span>
-    </a>
+<a class="nav-link collapsed" id="inicio" href="{{ url()->previous() }}">
+    <i class="bi bi-arrow-return-left"></i><span>Regresar</span>
+</a>
 </li>
 <li>
     <hr class="modulo-divider">

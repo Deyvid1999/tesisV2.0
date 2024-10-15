@@ -87,15 +87,17 @@ class ArchivoLayout extends Component
     // FUNCION PARA GUARDAR DATOS
     public function store()
     {
-        try{
+        try {
             $this->validate();
             $rutaArchivos = 'docs/' . $this->evaluacion->uni_id;
             $nombre_archivo_1 = $this->archivo->getClientOriginalName();
+            
             if ($this->archivo != null) {
                 $nombre_archivo = $this->archivo->storeAs($rutaArchivos, $nombre_archivo_1, 'public');
             } else {
                 $nombre_archivo = $this->archivo;
             }
+    
             Archivo::create([
                 'archivo' => $nombre_archivo,
                 'observacion' => $this->observacion,
@@ -104,11 +106,14 @@ class ArchivoLayout extends Component
             $this->cancel();
             $this->dispatchBrowserEvent('close-modal');
             session()->flash('success', 'Registro agregado con éxito');
-        }
-        catch(\Throwable $th){
+        } catch (\Throwable $th) {
             session()->flash('error', 'Verifique los datos');
         }
     }
+    
+
+    
+    
 
     // FUNCION PARA ACTUALIZAR LOS DATOS DEL ESTUDIANTE
     public function edit($id)

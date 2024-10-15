@@ -28,10 +28,12 @@ class UniversidadController extends Controller
 
         if ($request->hasFile('foto')) {
             $universidad['foto'] = $request->file('foto')->storeAs('uploads/' . $uni , 'foto.jpg', 'public');
+           
         }
+        
 
         if ($request->hasFile('informe')) {
-            $universidad['informe'] = $request->file('informe')->storeAs('uploads/' . $uni, 'informe.pdf', 'public');
+            $universidad['informe'] = $request->file('informe')->storeAs('uploads/' . $uni, $request->file('informe')->getClientOriginalName(), 'public');
         }
 
         Universidad::insert($universidad);
@@ -56,7 +58,7 @@ class UniversidadController extends Controller
         }
 
         if ($request->hasFile('informe')) {
-            $universidad['informe'] = $request->file('informe')->storeAs('uploads/' . $id, 'informe.pdf', 'public');
+            $universidad['informe'] = $request->file('informe')->storeAs('uploads/' . $id, $request->file('informe')->getClientOriginalName(), 'public');
         }
 
         Universidad::where('id', $id)->update($universidad);
