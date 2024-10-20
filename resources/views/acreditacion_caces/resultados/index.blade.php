@@ -71,6 +71,8 @@
     }
     @endphp
     @foreach ($indicadors as $indicador)
+    
+    @if (auth()->user()->hasRole('CriteriaR')&&auth()->user()->can("$evaluacion->id/$criterio->id")||auth()->user()->can('admin') || auth()->user()->can("$evaluacion->id-$indicador->id"))
     <div class="col-6">
         <div class="card">
             <div class="card-body">
@@ -79,6 +81,7 @@
             </div>
         </div>
     </div>
+    @endif
     @endforeach
 </div>
 @endsection

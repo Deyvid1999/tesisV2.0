@@ -23,7 +23,7 @@ class CriteriaAssignmentsController extends Controller
         $criterios = Criterio::all();
         $users = $usuarios = User::whereDoesntHave('roles', function ($query) {
             $query->where('name', 'admin');
-        })->get();;
+        })->get();
         $evaluacion = Evaluacion::find($id);
         $responsable = User::where('id',);
         foreach ($criterios as $key => $criterio) {
@@ -46,7 +46,7 @@ class CriteriaAssignmentsController extends Controller
         $evaluacionId = $request->evaluacion_id;
         $rolName = 'CriteriaR';
         $user = User::find($userId);
-        $user->assignRole($rolName);
+        $user->assignRole(2);
         $permissionName = "$evaluacionId/$criterioId";
 
         try {
@@ -56,9 +56,13 @@ class CriteriaAssignmentsController extends Controller
             session()->flash('success', 'Responsable asignado.');
         } catch (\Throwable $th) {
             $oldUser = User::permission($permissionName)->get()->first();
+            $permissionsCount = $oldUser->permissions()->where('name', 'like', "$evaluacionId/%")->count();
+            if($permissionsCount<2){
+                $oldUser->removeRole($rolName);
+            }
             $oldUser->revokePermissionTo($permissionName);
-            $oldUser->removeRole($rolName);
             $user->givePermissionTo($permissionName);
+            $user->assignRole($rolName);
             session()->flash('success', 'Responsable actualizado.');
         }
 

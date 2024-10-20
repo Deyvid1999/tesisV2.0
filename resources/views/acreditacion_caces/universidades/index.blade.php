@@ -18,27 +18,27 @@
     <div class="card-body mt-3">
         <div class="row justify-content-between">
             @can('admin')
-                <div class="col-md-3">
-                    <a type="button" class="btn btn-outline-pacifico mb-4 btn-sm"
-                        href="{{ route('universidades.create') }}">
-                        NUEVO REGISTRO
-                    </a>
-                </div>
+            <div class="col-md-3">
+                <a type="button" class="btn btn-outline-pacifico mb-4 btn-sm"
+                    href="{{ route('universidades.create') }}">
+                    NUEVO REGISTRO
+                </a>
+            </div>
             @endcan
             <div class="col-md-4">
                 @if ($message = Session::get('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <i class="bi bi-check-circle me-1"></i>
-                        {{ $message }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="bi bi-check-circle me-1"></i>
+                    {{ $message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
                 @endif
                 @if ($message = Session::get('error'))
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <i class="bi bi-check-circle me-1"></i>
-                        {{ $message }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="bi bi-check-circle me-1"></i>
+                    {{ $message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
                 @endif
             </div>
         </div>
@@ -57,73 +57,75 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @php
+                    $contador = 0;
+                    @endphp
                     @foreach ($universidades as $universidad)
-                                        @php
-                                            
-                                            $contador = 1;
-                                            $hasPermission = false;
-                                            $evaluaciones = $universidad->evaluacions;
-                                            foreach (auth()->user()->getAllPermissions() as $permission) {
-                                                if($evaluaciones->isEmpty()){
-                                                $hasPermission = true;
-                                                }
-                                                foreach ($evaluaciones as $evaluacion) {
-                                                    if (Str::startsWith($permission->name, "$evaluacion->id/") || auth()->user()->can('admin')) {
-                                                        $hasPermission = true;
-                                                        $contador += 1;
-                                                        break;
-                                                    }
-                                                }
-                                                if ($hasPermission) {
-                                                    break;
-                                                }
-                                            }
-                                        @endphp
-                                        @if ($hasPermission)
-                                            <tr>
-                                                <td>{{ $contador }}</td>
-                                                <td style="display: none;">{{ $universidad->universidad }}</td>
-                                                <td>{{ $universidad->sede }}</td>
-                                                <td>{{ $universidad->campus }}</td>
-                                                <td>{{ $universidad->ciudad }}</td>
-                                                <td class="text-center">
-                                                    @isset($universidad)
-                                                        @if ($universidad->informe != '')
-                                                            <a class="text-black" title="Descargar"
-                                                                href="{{ asset('storage/' . $universidad->informe) }}"
-                                                                download="{{ basename($universidad->informe) }}">
-                                                                <i class="bi bi-file-pdf" style="font-size: 15px"></i>
-                                                            </a>
-                                                        @else
-                                                            <i class="bi bi-x-circle-fill text-eliminar"></i> No disponible
-                                                        @endif
-                                                    @endisset
-                                                </td>
-                                                <td style="width: 160px;">
-                                                    <div class="nav fs-6">
-                                                        @can('admin')
-                                                            <a type="button" class="nav-link text-actualizar" title="Editar"
-                                                                href="{{ route('universidades.edit', $universidad->id) }}">
-                                                                <i class="bi bi-pencil-square"></i>
-                                                            </a>
-                                                        @endcan
-                                                        @can('admin')
-                                                            <form action="{{ route('universidades.destroy', $universidad->id) }}" method="POST"
-                                                                class="d-inline formulario-eliminar">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit" class="btn text-eliminar" title="Borrar"><i
-                                                                        class="bi bi-trash"></i></button>
-                                                            </form>
-                                                        @endcan
-                                                        <a type="button" class="nav-link text-crear" title="Ingresar"
-                                                            href="{{ route('evaluaciones.show', $universidad->id) }}">
-                                                            <i class="bi bi-box-arrow-in-right"></i>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        @endif
+                    @php
+                    $hasPermission = false;
+                    $evaluaciones = $universidad->evaluacions;
+                    foreach (auth()->user()->getAllPermissions() as $permission) {
+                    foreach ($evaluaciones as $evaluacion) {
+                    if (Str::startsWith($permission->name, "$evaluacion->id/") || auth()->user()->can('admin')||Str::startsWith($permission->name, "$evaluacion->id-")) {
+                    $hasPermission = true;
+                    $contador += 1;
+                    break;
+                    }
+                    }
+                    if($evaluaciones->isEmpty()&& auth()->user()->can('admin')){
+                    $contador += 1;
+                    $hasPermission = true;
+                    }
+                    if ($hasPermission) {
+                    break;
+                    }
+                    }
+                    @endphp
+                    @if ($hasPermission)
+                    <tr>
+                        <td>{{ $contador }}</td>
+                        <td style="display: none;">{{ $universidad->universidad }}</td>
+                        <td>{{ $universidad->sede }}</td>
+                        <td>{{ $universidad->campus }}</td>
+                        <td>{{ $universidad->ciudad }}</td>
+                        <td class="text-center">
+                            @isset($universidad)
+                            @if ($universidad->informe != '')
+                            <a class="text-black" title="Descargar"
+                                href="{{ asset('storage/' . $universidad->informe) }}"
+                                download="{{ basename($universidad->informe) }}">
+                                <i class="bi bi-file-pdf" style="font-size: 15px"></i>
+                            </a>
+                            @else
+                            <i class="bi bi-x-circle-fill text-eliminar"></i> No disponible
+                            @endif
+                            @endisset
+                        </td>
+                        <td style="width: 160px;">
+                            <div class="nav fs-6">
+                                @can('admin')
+                                <a type="button" class="nav-link text-actualizar" title="Editar"
+                                    href="{{ route('universidades.edit', $universidad->id) }}">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+                                @endcan
+                                @can('admin')
+                                <form action="{{ route('universidades.destroy', $universidad->id) }}" method="POST"
+                                    class="d-inline formulario-eliminar">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn text-eliminar" title="Borrar"><i
+                                            class="bi bi-trash"></i></button>
+                                </form>
+                                @endcan
+                                <a type="button" class="nav-link text-crear" title="Ingresar"
+                                    href="{{ route('evaluaciones.show', $universidad->id) }}">
+                                    <i class="bi bi-box-arrow-in-right"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    @endif
                     @endforeach
                 </tbody>
 
@@ -137,7 +139,7 @@
 @section('scripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    $('.formulario-eliminar').submit(function (e) {
+    $('.formulario-eliminar').submit(function(e) {
         e.preventDefault();
         Swal.fire({
             title: '¿Está seguro?',

@@ -12,7 +12,7 @@
     </nav>
 </div>
 @foreach ($criterios as $criterio )
-@can("criterio_1criterio->id")
+@if(auth()->user()->can("$evaluacion->id/$criterio->id")||auth()->user()->can('admin'))
 @if(!$criterio->subcriterios->isEmpty())
 <div class="card">
     <div class="card-header pb-2">
@@ -59,7 +59,6 @@
     @endforeach
 </div>
 @else
-@endcan
 
 <div class="card">
     <div class="card-header pb-2">
@@ -101,6 +100,7 @@
     </div>
 </div>
 @endif
+@endcan
 @endforeach
 @include('acreditacion_caces.indicador-assignments.modal')
 @endsection

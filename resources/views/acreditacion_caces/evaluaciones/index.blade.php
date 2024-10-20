@@ -55,12 +55,14 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @php
+                    $contador=0;
+                    @endphp
                     @foreach ($evaluaciones as $evaluacion)
                     @php
                     $hasPermission = false;
-                    $contador=0;
                     foreach (auth()->user()->getAllPermissions() as $permission) {
-                    if (Str::startsWith($permission->name, "$evaluacion->id/")||auth()->user()->can('admin')) {
+                    if (Str::startsWith($permission->name, "$evaluacion->id/")||auth()->user()->can('admin')||Str::startsWith($permission->name, "$evaluacion->id-")) {
                     $hasPermission = true;
                     $contador+=1;
                     break;
