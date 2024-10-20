@@ -48,8 +48,8 @@
             <div class="col-md-4 text-center">
                 @isset($evaluacion->universidad->foto)
                 @if ($evaluacion->universidad->foto != '')
-                <img src="{{ asset('storage/app/public') . '/' . $evaluacion->universidad->foto }}" alt="foto"
-                    width="auto" height="140px" title='foto'>
+                <img src="{{ asset('storage/' . $evaluacion->universidad->foto) }}" alt="foto"
+                   width="auto" height="140px" title='foto'>
                 @endif
                 @else
                 <i class="bi bi-person-square" height="50px"></i>
